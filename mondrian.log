@@ -1,0 +1,23 @@
+2023-04-18 12:45:08,563 INFO  [mondrian.olap.MondrianProperties] Mondrian: properties loaded from 'file:/C:/Users/snazari/AppData/Local/Temp/jetty-0_0_0_0-8080-mondrian-server_war-_-any-14422374720708911965/webapp/WEB-INF/classes/mondrian.properties'
+2023-04-18 12:45:08,563 INFO  [mondrian.olap.MondrianProperties] Mondrian: loaded 0 system properties
+2023-04-18 12:45:08,596 DEBUG [mondrian.rolap.agg.SegmentCacheWorker] Segment cache initialized: mondrian.rolap.cache.MemorySegmentCache
+2023-04-18 12:45:08,600 DEBUG [mondrian.server.MondrianServerImpl] new MondrianServer: id=1
+2023-04-18 12:45:08,611 DEBUG [mondrian.rolap.agg.SegmentCacheWorker] Segment cache initialized: mondrian.rolap.cache.MemorySegmentCache
+2023-04-18 12:45:08,611 DEBUG [mondrian.server.MondrianServerImpl] new MondrianServer: id=2
+2023-04-18 12:45:14,733 INFO  [mondrian.rolap.RolapUtil] Mondrian: JDBC driver org.postgresql.Driver loaded successfully
+2023-04-18 12:45:14,736 WARN  [mondrian.rolap.RolapUtil] Mondrian: Warning: JDBC driver sun.jdbc.odbc.JdbcOdbcDriver not found
+2023-04-18 12:45:14,737 WARN  [mondrian.rolap.RolapUtil] Mondrian: Warning: JDBC driver org.hsqldb.jdbcDriver not found
+2023-04-18 12:45:14,737 INFO  [mondrian.rolap.RolapUtil] Mondrian: JDBC driver oracle.jdbc.OracleDriver loaded successfully
+2023-04-18 12:45:14,739 WARN  [mondrian.rolap.RolapUtil] Mondrian: Warning: JDBC driver com.mysql.jdbc.Driver not found
+2023-04-18 12:45:14,763 DEBUG [mondrian.server.MondrianServerImpl] addConnection , id=2, statements=0, connections=0
+2023-04-18 12:45:14,767 DEBUG [mondrian.server.monitor] ConnectionStartEvent(0)
+2023-04-18 12:45:14,768 DEBUG [mondrian.server.MondrianServerImpl] addStatement , id=2, statements=0, connections=1
+2023-04-18 12:45:14,769 DEBUG [mondrian.server.monitor] StatementStartEvent(0)
+2023-04-18 12:45:14,799 DEBUG [mondrian.rolap.RolapSchema] Pool.get: create schema "file:/C:/Users/snazari/Downloads/mondrian/mondrianSchemaXSD.xsd" using dynamic processor
+2023-04-18 12:45:14,831 DEBUG [mondrian.server.MondrianServerImpl] addConnection , id=1, statements=0, connections=0
+2023-04-18 12:45:14,832 DEBUG [mondrian.server.monitor] ConnectionStartEvent(1)
+2023-04-18 12:45:14,833 DEBUG [mondrian.server.MondrianServerImpl] addStatement , id=1, statements=0, connections=1
+2023-04-18 12:45:14,833 DEBUG [mondrian.server.monitor] StatementStartEvent(1)
+2023-04-18 12:45:15,169 DEBUG [mondrian.server.MondrianServerImpl] removeStatement , id=2, statements=1, connections=1
+2023-04-18 12:45:15,169 DEBUG [mondrian.server.monitor] StatementInfo{statementId=0, executeStartCount=0, executeEndCount=0, phaseCount=0, cellCacheRequestCount=0, cellCacheHitCount=0, cellCacheMissCount=0, cellCachePendingCount=0, sqlStatementStartCount=0, sqlStatementExecuteCount=0, sqlStatementEndCount=0, sqlStatementRowFetchCount=0, sqlStatementExecuteNanos=0, cellRequestCount=0}
+2023-04-18 12:45:15,176 DEBUG [mondrian.server.monitor] StatementEndEvent(0)
