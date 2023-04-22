@@ -1,0 +1,64 @@
+<Schema name="OLAPSchema">
+  <Cube name="Purchasing Data">
+
+    <View alias="fact">
+      <SQL dialect="generic">
+        select *
+        from db_sch.wi2_oltp_mdorderposition join db_sch.wi2_oltp_mdorderhead on op_orderid = oh_orderid
+      </SQL>
+    </View>
+
+    <Dimension type="StandardDimension" name="product_dim" foreignKey="OP_PRODUCTID">
+      <Hierarchy name="product_category_division" hasAll="true">
+        <Table name="WI2_OLTP_MDPRODUCT" schema="DB_SCH"/>
+
+        <Level name="division" column="MDDIVISIONNO" />
+        <Level name="category" column="MDPRODUCTCATEGORYNO" />
+        <Level name="product" column="MDPRODUCTNO" />
+      </Hierarchy>
+    </Dimension>
+
+    <Dimension type="StandardDimension" name="customer_dim" foreignKey="OH_CUSTOMERID">
+      <Hierarchy hasAll="true" primaryKey="MDCUSTOMERNO">
+        <Table name="WI2_OLTP_MDCUSTOMER" schema="DB_SCH"/>
+
+        <Level name="country" column="MDCOUNTRYID" />
+        <Level name="sales_org" column="MDSALESORGNO" />
+        <Level name="city" column="MDCITYNAME" />
+        <Level name="customer" column="MDCUSTOMERNO" />
+      </Hierarchy>
+    </Dimension>
+
+    <Dimension type="TimeDimension" name="time_dim">
+      <Hierarchy hasAll="true" name="year/month/day">
+
+        <Level name="YEAR" levelType="TimeYears" column="OH_YEAR">
+          <KeyExpression>
+            <SQL dialect="generic">
+              EXTRACT(Year FROM OH_ORDERDATE)
+            </SQL>
+          </KeyExpression>
+        </Level>
+        <Level name="MONTH" levelType="TimeMonths" column="OH_MONTH">
+          <KeyExpression>
+            <SQL dialect="generic">
+              EXTRACT(Month FROM OH_ORDERDATE)
+            </SQL>
+          </KeyExpression>
+        </Level>
+        <Level name="DAY" levelType="TimeDays" column="OH_DAY">
+          <KeyExpression>
+            <SQL dialect="generic">
+              EXTRACT(Day FROM OH_ORDERDATE)
+            </SQL>
+          </KeyExpression>
+        </Level>
+      </Hierarchy>
+    </Dimension>
+
+    <Measure name="Revenue" column="OP_REVENUEUSD" aggregator="sum"/>
+    <Measure name="Discount" column="OP_DISCOUNTUSD" aggregator="sum"/>
+    <Measure name="CostOfGoodsSold" column="OP_COGMUSD" aggregator="sum"/>
+    <Measure name="SalesQuantity" column="OP_SALESQUANTITY" aggregator="sum"/>
+  </Cube>
+</Schema>
