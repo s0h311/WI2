@@ -1,0 +1,93 @@
+<Schema name="WSA994">
+  <Cube name="HypercubeDirtBikes" caption="Purchasing Data_Star" description="Cube" cache="true" enabled="true">
+    <!--Definition FT-->
+    <Table name="WI2_WSA994_FACTTABLE" schema="DB_2631075">
+      <!--Definition FCT -->
+      <Aggname name="AGG_WI2_WSA994_FACTCONSTELLATIONTABLE">
+        <AggFactCount column="AGG_FACT_COUNT" />
+        <AggLevel name="[Time.TimeHierarchy].Year" column="AGG_TIME_YEAR" collapsed="true" />
+        <AggLevel name="[Time.TimeHierarchy].Month" column="AGG_TIME_MONTH" collapsed="true" />
+        <AggLevel name="[Product.ProductHierarchy].ProductCategory" column="AGG_PRODUCTCATEGORY" collapsed="false" />
+        <AggLevel name="[Product.ProductHierarchy].Division" column="AGG_DIVISION" collapsed="false" />
+        <AggLevel name ="[Customer.CustomerHierarchy].Customer" column ="AGG_CUSTOMER_ID" collapsed = "false" />
+
+        <AggMeasure name="[Measures].RevenueUSD" column="AGG_REVENUEUSD" />
+        <AggMeasure name="[Measures].DiscountUSD" column="AGG_DISCOUNTUSD" />
+        <AggMeasure name="[Measures].CostOfGoodsSoldUSD" column="AGG_COSTOFSOLDGOODS" />
+        <AggMeasure name="[Measures].SalesQuantity" column="AGG_SALESQUANTITY" />
+        <AggMeasure name="[Measures].NoOfSalesOrders" column="AGG_NOOFSALESORDERS" />
+      </Aggname>
+    </Table>
+
+    <!--Productdimension auf Grundlage des Star-Schemas-->
+    <Dimension type="StandardDimension" foreignKey="FT_PRODUCT_ID" name="Product">
+      <Hierarchy name="ProductHierarchy" primaryKey="P_PRODUCT_ID" hasAll="true">
+        <Table name="WI2_WSA994_PRODUCT" schema="DB_2631075" />
+
+        <!--L1-->
+        <Level name="Division" column="P_DIVISION" uniqueMembers="true" />
+        <!--L1-->
+        <Level name="ProductCategory" column="P_PRODUCTCATEGORY" uniqueMembers="true" />
+        <!--L3-->
+        <Level name="ProductDescription" column="P_PRODUCTDESCRIPTION" />
+      </Hierarchy>
+    </Dimension>
+
+    <!--Customerdimension auf Grundlage des Star-Schemas-->
+    <Dimension type="StandardDimension" foreignKey="FT_CUSTOMER_ID" name="Customer">
+      <Hierarchy name="CustomerHierarchy" primaryKey="C_CUSTOMER_ID" hasAll="true">
+        <Table name="WI2_WSA994_CUSTOMER" schema="DB_2631075" />
+
+        <!--L1-->
+        <Level name="Country" column="C_COUNTRY" />
+        <!--L2-->
+        <Level name="SalesOrg" column="C_SALESORG" />
+        <!--L3-->
+        <Level name="City" column="C_CITY" />
+        <!--L4-->
+        <Level name="Customer" column="C_CUSTOMER_ID" uniqueMembers="true" />
+      </Hierarchy>
+    </Dimension>
+
+    <!--Timedimension auf Grundlage des Star-Schemas-->
+    <Dimension type="TimeDimension" name="Time">
+      <Hierarchy name="TimeHierarchy" hasAll="true">
+        <!--L1-->
+        <Level name="Year" levelType="TimeYears">
+          <KeyExpression>
+            <SQL dialect="generic">
+              extract (year from FT_TIME_ID)
+            </SQL>
+          </KeyExpression>
+        </Level>
+        <!--L2-->
+        <Level name="Month" levelType="TimeMonths">
+
+          <KeyExpression>
+            <SQL dialect="generic">
+              extract (month from FT_TIME_ID)
+            </SQL>
+          </KeyExpression>
+        </Level>
+        <!--L3-->
+        <Level name="Day" column="Day" levelType="TimeDays">
+
+          <KeyExpression>
+            <SQL dialect="generic">
+              EXTRACT(day FROM FT_TIME_ID)
+            </SQL>
+          </KeyExpression>
+        </Level>
+      </Hierarchy>
+    </Dimension>
+
+    <!--Measures auf Grundlage des Star-Schemas-->
+    <Measure name="RevenueUSD" column="FT_REVENUEUSD" aggregator="sum" />
+    <Measure name="DiscountUSD" column="FT_DISCOUNTUSD" aggregator="sum" />
+    <Measure name="CostOfGoodsSoldUSD" column="FT_COSTOFGOODSSOLDUSD" aggregator="sum" />
+    <Measure name="SalesQuantity" column="FT_SALESQUANTITY" aggregator="sum" />
+    <!--Hinzufügen neuer Kennzahl AnzahlVerkaufaufträge -->
+    <Measure name="NoOfSalesOrders" column="FT_NOOFSALESORDERS" aggregator="sum" />
+
+  </Cube>
+</Schema>
