@@ -1,0 +1,777 @@
+2023-05-26 10:46:42,154 DEBUG [mondrian.sql] 0: SqlTupleReader.readTuples [[Product.ProductHierarchy].[Product]]: executing sql [
+select
+    "WSA994_PRODUCT"."DIVISION_ID" as "c0",
+    "WSA994_PRODUCT"."DIVISION_DESC" as "c1",
+    "WSA994_PRODUCT"."CATEGORY_ID" as "c2",
+    "WSA994_PRODUCT"."CATEGORY_DESC" as "c3",
+    "WSA994_PRODUCT"."PRODUCT_ID" as "c4",
+    "WSA994_PRODUCT"."PRODUCT_DESC" as "c5"
+from
+    "DB_2631075"."WSA994_PRODUCT" "WSA994_PRODUCT"
+group by
+    "WSA994_PRODUCT"."DIVISION_ID",
+    "WSA994_PRODUCT"."DIVISION_DESC",
+    "WSA994_PRODUCT"."CATEGORY_ID",
+    "WSA994_PRODUCT"."CATEGORY_DESC",
+    "WSA994_PRODUCT"."PRODUCT_ID",
+    "WSA994_PRODUCT"."PRODUCT_DESC"
+order by
+    "WSA994_PRODUCT"."DIVISION_ID" ASC NULLS LAST,
+    "WSA994_PRODUCT"."CATEGORY_ID" ASC NULLS LAST,
+    "WSA994_PRODUCT"."PRODUCT_ID" ASC NULLS LAST]
+2023-05-26 10:46:42,198 DEBUG [mondrian.sql] 0: , exec 40 ms
+2023-05-26 10:46:42,284 DEBUG [mondrian.sql] 0: , exec+fetch 129 ms, 28 rows
+2023-05-26 10:46:42,303 DEBUG [mondrian.sql] 1: SqlStatisticsProvider.getColumnCardinality: executing sql [select count(distinct "DIVISION_ID") from "DB_2631075"."WSA994_PRODUCT"]
+2023-05-26 10:46:42,343 DEBUG [mondrian.sql] 1: , exec 38 ms
+2023-05-26 10:46:42,344 DEBUG [mondrian.sql] 1: , exec+fetch 41 ms, 1 rows
+2023-05-26 10:46:42,344 DEBUG [mondrian.sql] 2: SqlStatisticsProvider.getColumnCardinality: executing sql [select count(distinct "CATEGORY_ID") from "DB_2631075"."WSA994_PRODUCT"]
+2023-05-26 10:46:42,385 DEBUG [mondrian.sql] 2: , exec 42 ms
+2023-05-26 10:46:42,385 DEBUG [mondrian.sql] 2: , exec+fetch 41 ms, 1 rows
+2023-05-26 10:46:42,386 DEBUG [mondrian.sql] 3: SqlStatisticsProvider.getColumnCardinality: executing sql [select count(distinct "PRODUCT_ID") from "DB_2631075"."WSA994_PRODUCT"]
+2023-05-26 10:46:42,425 DEBUG [mondrian.sql] 3: , exec 39 ms
+2023-05-26 10:46:42,426 DEBUG [mondrian.sql] 3: , exec+fetch 40 ms, 1 rows
+2023-05-26 10:46:42,452 DEBUG [mondrian.sql] 4: Segment.load: executing sql [
+select
+    "WSA994_PRODUCT"."DIVISION_ID" as "c0",
+    "WSA994_PRODUCT"."CATEGORY_ID" as "c1",
+    "WSA994_PRODUCT"."PRODUCT_ID" as "c2",
+    sum("WSA994_FACTTABLE"."FT_REVENUEEUR") as "m0"
+from
+    "DB_2631075"."WSA994_PRODUCT" "WSA994_PRODUCT",
+    "DB_2631075"."WSA994_FACTTABLE" "WSA994_FACTTABLE"
+where
+    "WSA994_FACTTABLE"."FT_PRODUCT_ID" = "WSA994_PRODUCT"."PRODUCT_ID"
+group by
+    "WSA994_PRODUCT"."DIVISION_ID",
+    "WSA994_PRODUCT"."CATEGORY_ID",
+    "WSA994_PRODUCT"."PRODUCT_ID"]
+2023-05-26 10:46:42,691 DEBUG [mondrian.sql] 4: , exec 238 ms
+2023-05-26 10:46:42,779 DEBUG [mondrian.sql] 4: , exec+fetch 326 ms, 28 rows
+2023-05-26 10:47:41,659 DEBUG [mondrian.sql] 5: SqlTupleReader.readTuples [[Product.ProductHierarchy].[ProductCategory]]: executing sql [
+select
+    "WSA994_PRODUCT"."DIVISION_ID" as "c0",
+    "WSA994_PRODUCT"."DIVISION_DESC" as "c1",
+    "WSA994_PRODUCT"."CATEGORY_ID" as "c2",
+    "WSA994_PRODUCT"."CATEGORY_DESC" as "c3"
+from
+    "DB_2631075"."WSA994_PRODUCT" "WSA994_PRODUCT"
+group by
+    "WSA994_PRODUCT"."DIVISION_ID",
+    "WSA994_PRODUCT"."DIVISION_DESC",
+    "WSA994_PRODUCT"."CATEGORY_ID",
+    "WSA994_PRODUCT"."CATEGORY_DESC"
+order by
+    "WSA994_PRODUCT"."DIVISION_ID" ASC NULLS LAST,
+    "WSA994_PRODUCT"."CATEGORY_ID" ASC NULLS LAST]
+2023-05-26 10:47:41,709 DEBUG [mondrian.sql] 5: , exec 50 ms
+2023-05-26 10:47:41,710 DEBUG [mondrian.sql] 5: , exec+fetch 50 ms, 6 rows
+2023-05-26 10:48:42,349 DEBUG [mondrian.sql] 6: SqlTupleReader.readTuples [[Customer.CustomerHierarchy].[Customer]]: executing sql [
+select
+    "WSA994_CUSTOMER"."COUNTRY_ID" as "c0",
+    "WSA994_CUSTOMER"."SALESORG_ID" as "c1",
+    "WSA994_CUSTOMER"."SALESORG_DESC" as "c2",
+    "WSA994_CUSTOMER"."CITY_DESC" as "c3",
+    "WSA994_CUSTOMER"."CUSTOMER_ID" as "c4",
+    "WSA994_CUSTOMER"."CUSTOMER_DESC" as "c5"
+from
+    "DB_2631075"."WSA994_CUSTOMER" "WSA994_CUSTOMER"
+group by
+    "WSA994_CUSTOMER"."COUNTRY_ID",
+    "WSA994_CUSTOMER"."SALESORG_ID",
+    "WSA994_CUSTOMER"."SALESORG_DESC",
+    "WSA994_CUSTOMER"."CITY_DESC",
+    "WSA994_CUSTOMER"."CUSTOMER_ID",
+    "WSA994_CUSTOMER"."CUSTOMER_DESC"
+order by
+    "WSA994_CUSTOMER"."COUNTRY_ID" ASC NULLS LAST,
+    "WSA994_CUSTOMER"."SALESORG_ID" ASC NULLS LAST,
+    "WSA994_CUSTOMER"."CITY_DESC" ASC NULLS LAST,
+    "WSA994_CUSTOMER"."CUSTOMER_ID" ASC NULLS LAST]
+2023-05-26 10:48:42,390 DEBUG [mondrian.sql] 6: , exec 41 ms
+2023-05-26 10:48:42,468 DEBUG [mondrian.sql] 6: , exec+fetch 119 ms, 24 rows
+2023-05-26 10:48:42,477 DEBUG [mondrian.sql] 7: SqlStatisticsProvider.getColumnCardinality: executing sql [select count(distinct "CUSTOMER_ID") from "DB_2631075"."WSA994_CUSTOMER"]
+2023-05-26 10:48:42,517 DEBUG [mondrian.sql] 7: , exec 39 ms
+2023-05-26 10:48:42,517 DEBUG [mondrian.sql] 7: , exec+fetch 39 ms, 1 rows
+2023-05-26 10:48:42,519 DEBUG [mondrian.sql] 8: Segment.load: executing sql [
+select
+    "WSA994_CUSTOMER"."CUSTOMER_ID" as "c0",
+    sum("WSA994_FACTTABLE"."FT_REVENUEEUR") as "m0"
+from
+    "DB_2631075"."WSA994_CUSTOMER" "WSA994_CUSTOMER",
+    "DB_2631075"."WSA994_FACTTABLE" "WSA994_FACTTABLE"
+where
+    "WSA994_FACTTABLE"."FT_CUSTOMER_ID" = "WSA994_CUSTOMER"."CUSTOMER_ID"
+group by
+    "WSA994_CUSTOMER"."CUSTOMER_ID"]
+2023-05-26 10:48:42,932 DEBUG [mondrian.sql] 8: , exec 412 ms
+2023-05-26 10:48:43,005 DEBUG [mondrian.sql] 8: , exec+fetch 486 ms, 24 rows
+2023-05-26 10:48:43,040 DEBUG [mondrian.sql] 9: Segment.load: executing sql [
+select
+    "WSA994_PRODUCT"."DIVISION_ID" as "c0",
+    "WSA994_PRODUCT"."CATEGORY_ID" as "c1",
+    "WSA994_PRODUCT"."PRODUCT_ID" as "c2",
+    "WSA994_CUSTOMER"."CUSTOMER_ID" as "c3",
+    sum("WSA994_FACTTABLE"."FT_REVENUEEUR") as "m0"
+from
+    "DB_2631075"."WSA994_PRODUCT" "WSA994_PRODUCT",
+    "DB_2631075"."WSA994_FACTTABLE" "WSA994_FACTTABLE",
+    "DB_2631075"."WSA994_CUSTOMER" "WSA994_CUSTOMER"
+where
+    "WSA994_FACTTABLE"."FT_PRODUCT_ID" = "WSA994_PRODUCT"."PRODUCT_ID"
+and
+    "WSA994_FACTTABLE"."FT_CUSTOMER_ID" = "WSA994_CUSTOMER"."CUSTOMER_ID"
+group by
+    "WSA994_PRODUCT"."DIVISION_ID",
+    "WSA994_PRODUCT"."CATEGORY_ID",
+    "WSA994_PRODUCT"."PRODUCT_ID",
+    "WSA994_CUSTOMER"."CUSTOMER_ID"]
+2023-05-26 10:48:43,387 DEBUG [mondrian.sql] 9: , exec 346 ms
+2023-05-26 10:48:45,816 DEBUG [mondrian.sql] 9: , exec+fetch 2776 ms, 653 rows
+2023-05-26 10:48:49,818 DEBUG [mondrian.sql] 10: SqlTupleReader.readTuples [[Customer.CustomerHierarchy].[Customer], [Time.TimeHierarchy].[Day]]: executing sql [
+select
+    "WSA994_CUSTOMER"."COUNTRY_ID" as "c0",
+    "WSA994_CUSTOMER"."SALESORG_ID" as "c1",
+    "WSA994_CUSTOMER"."SALESORG_DESC" as "c2",
+    "WSA994_CUSTOMER"."CITY_DESC" as "c3",
+    "WSA994_CUSTOMER"."CUSTOMER_ID" as "c4",
+    "WSA994_CUSTOMER"."CUSTOMER_DESC" as "c5",
+    extract (year from FT_TIME_ID) as "c6",
+    extract (month from FT_TIME_ID) as "c7",
+    EXTRACT(day FROM FT_TIME_ID) as "c8"
+from
+    "DB_2631075"."WSA994_CUSTOMER" "WSA994_CUSTOMER",
+    "DB_2631075"."WSA994_FACTTABLE" "WSA994_FACTTABLE"
+where
+    "WSA994_FACTTABLE"."FT_CUSTOMER_ID" = "WSA994_CUSTOMER"."CUSTOMER_ID"
+group by
+    "WSA994_CUSTOMER"."COUNTRY_ID",
+    "WSA994_CUSTOMER"."SALESORG_ID",
+    "WSA994_CUSTOMER"."SALESORG_DESC",
+    "WSA994_CUSTOMER"."CITY_DESC",
+    "WSA994_CUSTOMER"."CUSTOMER_ID",
+    "WSA994_CUSTOMER"."CUSTOMER_DESC",
+    extract (year from FT_TIME_ID),
+    extract (month from FT_TIME_ID),
+    EXTRACT(day FROM FT_TIME_ID)
+order by
+    "WSA994_CUSTOMER"."COUNTRY_ID" ASC NULLS LAST,
+    "WSA994_CUSTOMER"."SALESORG_ID" ASC NULLS LAST,
+    "WSA994_CUSTOMER"."CITY_DESC" ASC NULLS LAST,
+    "WSA994_CUSTOMER"."CUSTOMER_ID" ASC NULLS LAST,
+    extract (year from FT_TIME_ID) ASC NULLS LAST,
+    extract (month from FT_TIME_ID) ASC NULLS LAST,
+    EXTRACT(day FROM FT_TIME_ID) ASC NULLS LAST]
+2023-05-26 10:48:49,957 DEBUG [mondrian.sql] 10: , exec 138 ms
+2023-05-26 10:49:14,690 DEBUG [mondrian.sql] 10: , exec+fetch 24871 ms, 6636 rows
+2023-05-26 10:49:14,720 DEBUG [mondrian.sql] 11: SqlStatisticsProvider.getQueryCardinality: executing sql [
+select count(*) from (select distinct
+    extract (year from FT_TIME_ID) as "c0"
+from
+    "DB_2631075"."WSA994_FACTTABLE" "WSA994_FACTTABLE")]
+2023-05-26 10:49:14,790 DEBUG [mondrian.sql] 11: , exec 69 ms
+2023-05-26 10:49:14,790 DEBUG [mondrian.sql] 11: , exec+fetch 70 ms, 1 rows
+2023-05-26 10:49:14,790 DEBUG [mondrian.sql] 12: SqlStatisticsProvider.getQueryCardinality: executing sql [
+select count(*) from (select distinct
+    extract (month from FT_TIME_ID) as "c0"
+from
+    "DB_2631075"."WSA994_FACTTABLE" "WSA994_FACTTABLE")]
+2023-05-26 10:49:14,853 DEBUG [mondrian.sql] 12: , exec 61 ms
+2023-05-26 10:49:14,853 DEBUG [mondrian.sql] 12: , exec+fetch 63 ms, 1 rows
+2023-05-26 10:49:14,853 DEBUG [mondrian.sql] 13: SqlStatisticsProvider.getQueryCardinality: executing sql [
+select count(*) from (select distinct
+    EXTRACT(day FROM FT_TIME_ID) as "c0"
+from
+    "DB_2631075"."WSA994_FACTTABLE" "WSA994_FACTTABLE")]
+2023-05-26 10:49:14,919 DEBUG [mondrian.sql] 13: , exec 66 ms
+2023-05-26 10:49:14,919 DEBUG [mondrian.sql] 13: , exec+fetch 66 ms, 1 rows
+2023-05-26 10:49:14,954 DEBUG [mondrian.sql] 14: Segment.load: executing sql [
+select
+    "WSA994_CUSTOMER"."CUSTOMER_ID" as "c0",
+    extract (year from FT_TIME_ID) as "c1",
+    extract (month from FT_TIME_ID) as "c2",
+    EXTRACT(day FROM FT_TIME_ID) as "c3",
+    sum("WSA994_FACTTABLE"."FT_REVENUEEUR") as "m0"
+from
+    "DB_2631075"."WSA994_CUSTOMER" "WSA994_CUSTOMER",
+    "DB_2631075"."WSA994_FACTTABLE" "WSA994_FACTTABLE"
+where
+    "WSA994_FACTTABLE"."FT_CUSTOMER_ID" = "WSA994_CUSTOMER"."CUSTOMER_ID"
+group by
+    "WSA994_CUSTOMER"."CUSTOMER_ID",
+    extract (year from FT_TIME_ID),
+    extract (month from FT_TIME_ID),
+    EXTRACT(day FROM FT_TIME_ID)]
+2023-05-26 10:49:15,456 DEBUG [mondrian.sql] 14: , exec 502 ms
+2023-05-26 10:49:40,179 DEBUG [mondrian.sql] 14: , exec+fetch 25225 ms, 6636 rows
+2023-05-26 10:49:41,116 DEBUG [mondrian.sql] 15: Segment.load: executing sql [
+select
+    "WSA994_PRODUCT"."DIVISION_ID" as "c0",
+    "WSA994_PRODUCT"."CATEGORY_ID" as "c1",
+    "WSA994_PRODUCT"."PRODUCT_ID" as "c2",
+    "WSA994_CUSTOMER"."CUSTOMER_ID" as "c3",
+    extract (year from FT_TIME_ID) as "c4",
+    extract (month from FT_TIME_ID) as "c5",
+    EXTRACT(day FROM FT_TIME_ID) as "c6",
+    sum("WSA994_FACTTABLE"."FT_REVENUEEUR") as "m0"
+from
+    "DB_2631075"."WSA994_PRODUCT" "WSA994_PRODUCT",
+    "DB_2631075"."WSA994_FACTTABLE" "WSA994_FACTTABLE",
+    "DB_2631075"."WSA994_CUSTOMER" "WSA994_CUSTOMER"
+where
+    "WSA994_FACTTABLE"."FT_PRODUCT_ID" = "WSA994_PRODUCT"."PRODUCT_ID"
+and
+    "WSA994_PRODUCT"."PRODUCT_ID" in ('BOTL1000', 'CAGE1000', 'DXRD1000', 'DXRD2000', 'ELBK1000', 'EPAD1000', 'FAID1000', 'KPAD1000', 'OHMT1000', 'ORHT1000', 'ORHT2000', 'ORMN1000', 'ORWN1000', 'PRRD1000', 'PUMP1000', 'RHMT1000', 'RKIT1000', 'SHRT1000')
+and
+    "WSA994_FACTTABLE"."FT_CUSTOMER_ID" = "WSA994_CUSTOMER"."CUSTOMER_ID"
+group by
+    "WSA994_PRODUCT"."DIVISION_ID",
+    "WSA994_PRODUCT"."CATEGORY_ID",
+    "WSA994_PRODUCT"."PRODUCT_ID",
+    "WSA994_CUSTOMER"."CUSTOMER_ID",
+    extract (year from FT_TIME_ID),
+    extract (month from FT_TIME_ID),
+    EXTRACT(day FROM FT_TIME_ID)]
+2023-05-26 10:49:41,597 DEBUG [mondrian.sql] 15: , exec 481 ms
+2023-05-26 10:51:40,500 DEBUG [mondrian.sql] 15: , exec+fetch 119384 ms, 32000 rows
+2023-05-26 10:59:32,074 DEBUG [mondrian.sql] 16: SqlTupleReader.readTuples [[Time.TimeHierarchy].[Year]]: executing sql [
+select
+    extract (year from FT_TIME_ID) as "c0"
+from
+    "DB_2631075"."WSA994_FACTTABLE" "WSA994_FACTTABLE"
+group by
+    extract (year from FT_TIME_ID)
+order by
+    extract (year from FT_TIME_ID) ASC NULLS LAST]
+2023-05-26 10:59:32,154 DEBUG [mondrian.sql] 16: , exec 79 ms
+2023-05-26 10:59:32,191 DEBUG [mondrian.sql] 16: , exec+fetch 117 ms, 10 rows
+2023-05-26 10:59:32,197 DEBUG [mondrian.sql] 17: Segment.load: executing sql [
+select
+    extract (year from FT_TIME_ID) as "c0",
+    sum("WSA994_FACTTABLE"."FT_REVENUEUSD") as "m0",
+    sum("WSA994_FACTTABLE"."FT_DISCOUNTUSD") as "m1",
+    sum("WSA994_FACTTABLE"."FT_COGMUSD") as "m2",
+    sum("WSA994_FACTTABLE"."FT_SALESQUANTITY") as "m3",
+    sum("WSA994_FACTTABLE"."FT_NOOFSALESORDERS") as "m4",
+    sum("WSA994_FACTTABLE"."FT_NETSALESUSD") as "m5"
+from
+    "DB_2631075"."WSA994_FACTTABLE" "WSA994_FACTTABLE"
+where
+    extract (year from FT_TIME_ID) = '2013'
+group by
+    extract (year from FT_TIME_ID)]
+2023-05-26 10:59:32,278 DEBUG [mondrian.sql] 17: , exec 81 ms
+2023-05-26 10:59:32,279 DEBUG [mondrian.sql] 17: , exec+fetch 82 ms, 1 rows
+2023-05-26 10:59:32,284 DEBUG [mondrian.sql] 18: Segment.load: executing sql [
+select
+    extract (year from FT_TIME_ID) as "c0",
+    sum("WSA994_FACTTABLE"."FT_REVENUEUSD") as "m0",
+    sum("WSA994_FACTTABLE"."FT_DISCOUNTUSD") as "m1",
+    sum("WSA994_FACTTABLE"."FT_COGMUSD") as "m2",
+    sum("WSA994_FACTTABLE"."FT_SALESQUANTITY") as "m3",
+    sum("WSA994_FACTTABLE"."FT_NOOFSALESORDERS") as "m4",
+    sum("WSA994_FACTTABLE"."FT_NETSALESUSD") as "m5"
+from
+    "DB_2631075"."WSA994_FACTTABLE" "WSA994_FACTTABLE"
+group by
+    extract (year from FT_TIME_ID)]
+2023-05-26 10:59:32,358 DEBUG [mondrian.sql] 18: , exec 74 ms
+2023-05-26 10:59:32,397 DEBUG [mondrian.sql] 18: , exec+fetch 113 ms, 10 rows
+2023-05-26 10:59:34,363 DEBUG [mondrian.sql] 19: SqlTupleReader.readTuples [[Product.ProductHierarchy].[Division]]: executing sql [
+select
+    "WSA994_PRODUCT"."DIVISION_ID" as "c0",
+    "WSA994_PRODUCT"."DIVISION_DESC" as "c1"
+from
+    "DB_2631075"."WSA994_PRODUCT" "WSA994_PRODUCT"
+group by
+    "WSA994_PRODUCT"."DIVISION_ID",
+    "WSA994_PRODUCT"."DIVISION_DESC"
+order by
+    "WSA994_PRODUCT"."DIVISION_ID" ASC NULLS LAST]
+2023-05-26 10:59:34,408 DEBUG [mondrian.sql] 19: , exec 45 ms
+2023-05-26 10:59:34,408 DEBUG [mondrian.sql] 19: , exec+fetch 45 ms, 2 rows
+2023-05-26 10:59:34,414 DEBUG [mondrian.sql] 20: Segment.load: executing sql [
+select
+    "WSA994_PRODUCT"."DIVISION_ID" as "c0",
+    sum("WSA994_FACTTABLE"."FT_REVENUEUSD") as "m0",
+    sum("WSA994_FACTTABLE"."FT_DISCOUNTUSD") as "m1",
+    sum("WSA994_FACTTABLE"."FT_COGMUSD") as "m2",
+    sum("WSA994_FACTTABLE"."FT_SALESQUANTITY") as "m3",
+    sum("WSA994_FACTTABLE"."FT_NOOFSALESORDERS") as "m4",
+    sum("WSA994_FACTTABLE"."FT_NETSALESUSD") as "m5"
+from
+    "DB_2631075"."WSA994_PRODUCT" "WSA994_PRODUCT",
+    "DB_2631075"."WSA994_FACTTABLE" "WSA994_FACTTABLE"
+where
+    "WSA994_FACTTABLE"."FT_PRODUCT_ID" = "WSA994_PRODUCT"."PRODUCT_ID"
+group by
+    "WSA994_PRODUCT"."DIVISION_ID"]
+2023-05-26 10:59:34,489 DEBUG [mondrian.sql] 20: , exec 75 ms
+2023-05-26 10:59:34,490 DEBUG [mondrian.sql] 20: , exec+fetch 76 ms, 2 rows
+2023-05-26 10:59:34,500 DEBUG [mondrian.sql] 21: Segment.load: executing sql [
+select
+    "WSA994_PRODUCT"."DIVISION_ID" as "c0",
+    extract (year from FT_TIME_ID) as "c1",
+    sum("WSA994_FACTTABLE"."FT_REVENUEUSD") as "m0",
+    sum("WSA994_FACTTABLE"."FT_DISCOUNTUSD") as "m1",
+    sum("WSA994_FACTTABLE"."FT_COGMUSD") as "m2",
+    sum("WSA994_FACTTABLE"."FT_SALESQUANTITY") as "m3",
+    sum("WSA994_FACTTABLE"."FT_NOOFSALESORDERS") as "m4",
+    sum("WSA994_FACTTABLE"."FT_NETSALESUSD") as "m5",
+    sum("WSA994_FACTTABLE"."FT_REVENUEEUR") as "m6"
+from
+    "DB_2631075"."WSA994_PRODUCT" "WSA994_PRODUCT",
+    "DB_2631075"."WSA994_FACTTABLE" "WSA994_FACTTABLE"
+where
+    "WSA994_FACTTABLE"."FT_PRODUCT_ID" = "WSA994_PRODUCT"."PRODUCT_ID"
+group by
+    "WSA994_PRODUCT"."DIVISION_ID",
+    extract (year from FT_TIME_ID)]
+2023-05-26 10:59:34,588 DEBUG [mondrian.sql] 21: , exec 88 ms
+2023-05-26 10:59:34,663 DEBUG [mondrian.sql] 21: , exec+fetch 163 ms, 20 rows
+2023-05-26 10:59:35,452 DEBUG [mondrian.sql] 22: SqlTupleReader.readTuples [[Product.ProductHierarchy].[Division], [Customer.CustomerHierarchy].[Country]]: executing sql [
+select
+    "WSA994_PRODUCT"."DIVISION_ID" as "c0",
+    "WSA994_PRODUCT"."DIVISION_DESC" as "c1",
+    "WSA994_CUSTOMER"."COUNTRY_ID" as "c2"
+from
+    "DB_2631075"."WSA994_PRODUCT" "WSA994_PRODUCT",
+    "DB_2631075"."WSA994_FACTTABLE" "WSA994_FACTTABLE",
+    "DB_2631075"."WSA994_CUSTOMER" "WSA994_CUSTOMER"
+where
+    "WSA994_FACTTABLE"."FT_PRODUCT_ID" = "WSA994_PRODUCT"."PRODUCT_ID"
+and
+    "WSA994_FACTTABLE"."FT_CUSTOMER_ID" = "WSA994_CUSTOMER"."CUSTOMER_ID"
+group by
+    "WSA994_PRODUCT"."DIVISION_ID",
+    "WSA994_PRODUCT"."DIVISION_DESC",
+    "WSA994_CUSTOMER"."COUNTRY_ID"
+order by
+    "WSA994_PRODUCT"."DIVISION_ID" ASC NULLS LAST,
+    "WSA994_CUSTOMER"."COUNTRY_ID" ASC NULLS LAST]
+2023-05-26 10:59:35,539 DEBUG [mondrian.sql] 22: , exec 85 ms
+2023-05-26 10:59:35,539 DEBUG [mondrian.sql] 22: , exec+fetch 87 ms, 4 rows
+2023-05-26 10:59:35,540 DEBUG [mondrian.sql] 23: SqlStatisticsProvider.getColumnCardinality: executing sql [select count(distinct "COUNTRY_ID") from "DB_2631075"."WSA994_CUSTOMER"]
+2023-05-26 10:59:35,583 DEBUG [mondrian.sql] 23: , exec 43 ms
+2023-05-26 10:59:35,583 DEBUG [mondrian.sql] 23: , exec+fetch 43 ms, 1 rows
+2023-05-26 10:59:35,586 DEBUG [mondrian.sql] 24: Segment.load: executing sql [
+select
+    "WSA994_PRODUCT"."DIVISION_ID" as "c0",
+    "WSA994_CUSTOMER"."COUNTRY_ID" as "c1",
+    sum("WSA994_FACTTABLE"."FT_REVENUEUSD") as "m0",
+    sum("WSA994_FACTTABLE"."FT_DISCOUNTUSD") as "m1",
+    sum("WSA994_FACTTABLE"."FT_COGMUSD") as "m2",
+    sum("WSA994_FACTTABLE"."FT_SALESQUANTITY") as "m3",
+    sum("WSA994_FACTTABLE"."FT_NOOFSALESORDERS") as "m4",
+    sum("WSA994_FACTTABLE"."FT_NETSALESUSD") as "m5",
+    sum("WSA994_FACTTABLE"."FT_REVENUEEUR") as "m6"
+from
+    "DB_2631075"."WSA994_PRODUCT" "WSA994_PRODUCT",
+    "DB_2631075"."WSA994_FACTTABLE" "WSA994_FACTTABLE",
+    "DB_2631075"."WSA994_CUSTOMER" "WSA994_CUSTOMER"
+where
+    "WSA994_FACTTABLE"."FT_PRODUCT_ID" = "WSA994_PRODUCT"."PRODUCT_ID"
+and
+    "WSA994_FACTTABLE"."FT_CUSTOMER_ID" = "WSA994_CUSTOMER"."CUSTOMER_ID"
+group by
+    "WSA994_PRODUCT"."DIVISION_ID",
+    "WSA994_CUSTOMER"."COUNTRY_ID"]
+2023-05-26 10:59:35,679 DEBUG [mondrian.sql] 24: , exec 92 ms
+2023-05-26 10:59:35,679 DEBUG [mondrian.sql] 24: , exec+fetch 93 ms, 4 rows
+2023-05-26 10:59:35,687 DEBUG [mondrian.sql] 25: Segment.load: executing sql [
+select
+    "WSA994_PRODUCT"."DIVISION_ID" as "c0",
+    "WSA994_CUSTOMER"."COUNTRY_ID" as "c1",
+    extract (year from FT_TIME_ID) as "c2",
+    sum("WSA994_FACTTABLE"."FT_REVENUEUSD") as "m0",
+    sum("WSA994_FACTTABLE"."FT_DISCOUNTUSD") as "m1",
+    sum("WSA994_FACTTABLE"."FT_COGMUSD") as "m2",
+    sum("WSA994_FACTTABLE"."FT_SALESQUANTITY") as "m3",
+    sum("WSA994_FACTTABLE"."FT_NOOFSALESORDERS") as "m4",
+    sum("WSA994_FACTTABLE"."FT_NETSALESUSD") as "m5",
+    sum("WSA994_FACTTABLE"."FT_REVENUEEUR") as "m6"
+from
+    "DB_2631075"."WSA994_PRODUCT" "WSA994_PRODUCT",
+    "DB_2631075"."WSA994_FACTTABLE" "WSA994_FACTTABLE",
+    "DB_2631075"."WSA994_CUSTOMER" "WSA994_CUSTOMER"
+where
+    "WSA994_FACTTABLE"."FT_PRODUCT_ID" = "WSA994_PRODUCT"."PRODUCT_ID"
+and
+    "WSA994_FACTTABLE"."FT_CUSTOMER_ID" = "WSA994_CUSTOMER"."CUSTOMER_ID"
+group by
+    "WSA994_PRODUCT"."DIVISION_ID",
+    "WSA994_CUSTOMER"."COUNTRY_ID",
+    extract (year from FT_TIME_ID)]
+2023-05-26 10:59:35,790 DEBUG [mondrian.sql] 25: , exec 102 ms
+2023-05-26 10:59:35,939 DEBUG [mondrian.sql] 25: , exec+fetch 252 ms, 40 rows
+2023-05-26 10:59:37,859 DEBUG [mondrian.sql] 26: SqlTupleReader.readTuples [[Customer.CustomerHierarchy].[Country]]: executing sql [
+select
+    "WSA994_CUSTOMER"."COUNTRY_ID" as "c0"
+from
+    "DB_2631075"."WSA994_CUSTOMER" "WSA994_CUSTOMER"
+group by
+    "WSA994_CUSTOMER"."COUNTRY_ID"
+order by
+    "WSA994_CUSTOMER"."COUNTRY_ID" ASC NULLS LAST]
+2023-05-26 10:59:37,898 DEBUG [mondrian.sql] 26: , exec 39 ms
+2023-05-26 10:59:37,899 DEBUG [mondrian.sql] 26: , exec+fetch 40 ms, 2 rows
+2023-05-26 10:59:37,909 DEBUG [mondrian.sql] 27: SqlTupleReader.readTuples [[Product.ProductHierarchy].[Division], [Time.TimeHierarchy].[Year]]: executing sql [
+select
+    "WSA994_PRODUCT"."DIVISION_ID" as "c0",
+    "WSA994_PRODUCT"."DIVISION_DESC" as "c1",
+    extract (year from FT_TIME_ID) as "c2"
+from
+    "DB_2631075"."WSA994_PRODUCT" "WSA994_PRODUCT",
+    "DB_2631075"."WSA994_FACTTABLE" "WSA994_FACTTABLE"
+where
+    "WSA994_FACTTABLE"."FT_PRODUCT_ID" = "WSA994_PRODUCT"."PRODUCT_ID"
+group by
+    "WSA994_PRODUCT"."DIVISION_ID",
+    "WSA994_PRODUCT"."DIVISION_DESC",
+    extract (year from FT_TIME_ID)
+order by
+    "WSA994_PRODUCT"."DIVISION_ID" ASC NULLS LAST,
+    extract (year from FT_TIME_ID) ASC NULLS LAST]
+2023-05-26 10:59:37,987 DEBUG [mondrian.sql] 27: , exec 77 ms
+2023-05-26 10:59:38,061 DEBUG [mondrian.sql] 27: , exec+fetch 152 ms, 20 rows
+2023-05-26 10:59:39,692 DEBUG [mondrian.sql] 28: SqlTupleReader.readTuples [[Product.ProductHierarchy].[Division], [Time.TimeHierarchy].[Year]]: executing sql [
+select
+    "WSA994_PRODUCT"."DIVISION_ID" as "c0",
+    "WSA994_PRODUCT"."DIVISION_DESC" as "c1",
+    extract (year from FT_TIME_ID) as "c2"
+from
+    "DB_2631075"."WSA994_PRODUCT" "WSA994_PRODUCT",
+    "DB_2631075"."WSA994_FACTTABLE" "WSA994_FACTTABLE"
+where
+    "WSA994_FACTTABLE"."FT_PRODUCT_ID" = "WSA994_PRODUCT"."PRODUCT_ID"
+group by
+    "WSA994_PRODUCT"."DIVISION_ID",
+    "WSA994_PRODUCT"."DIVISION_DESC",
+    extract (year from FT_TIME_ID)
+order by
+    "WSA994_PRODUCT"."DIVISION_ID" ASC NULLS LAST,
+    extract (year from FT_TIME_ID) ASC NULLS LAST]
+2023-05-26 10:59:39,758 DEBUG [mondrian.sql] 28: , exec 66 ms
+2023-05-26 10:59:39,832 DEBUG [mondrian.sql] 28: , exec+fetch 140 ms, 20 rows
+2023-05-26 10:59:42,057 DEBUG [mondrian.sql] 29: SqlTupleReader.readTuples [[Time.TimeHierarchy].[Year], [Product.ProductHierarchy].[Division]]: executing sql [
+select
+    extract (year from FT_TIME_ID) as "c0",
+    "WSA994_PRODUCT"."DIVISION_ID" as "c1",
+    "WSA994_PRODUCT"."DIVISION_DESC" as "c2"
+from
+    "DB_2631075"."WSA994_FACTTABLE" "WSA994_FACTTABLE",
+    "DB_2631075"."WSA994_PRODUCT" "WSA994_PRODUCT"
+where
+    "WSA994_FACTTABLE"."FT_PRODUCT_ID" = "WSA994_PRODUCT"."PRODUCT_ID"
+group by
+    extract (year from FT_TIME_ID),
+    "WSA994_PRODUCT"."DIVISION_ID",
+    "WSA994_PRODUCT"."DIVISION_DESC"
+order by
+    extract (year from FT_TIME_ID) ASC NULLS LAST,
+    "WSA994_PRODUCT"."DIVISION_ID" ASC NULLS LAST]
+2023-05-26 10:59:42,129 DEBUG [mondrian.sql] 29: , exec 72 ms
+2023-05-26 10:59:42,204 DEBUG [mondrian.sql] 29: , exec+fetch 147 ms, 20 rows
+2023-05-26 10:59:44,569 DEBUG [mondrian.sql] 30: SqlTupleReader.readTuples [[Time.TimeHierarchy].[Year], [Product.ProductHierarchy].[Division], [Customer.CustomerHierarchy].[Country]]: executing sql [
+select
+    extract (year from FT_TIME_ID) as "c0",
+    "WSA994_PRODUCT"."DIVISION_ID" as "c1",
+    "WSA994_PRODUCT"."DIVISION_DESC" as "c2",
+    "WSA994_CUSTOMER"."COUNTRY_ID" as "c3"
+from
+    "DB_2631075"."WSA994_FACTTABLE" "WSA994_FACTTABLE",
+    "DB_2631075"."WSA994_PRODUCT" "WSA994_PRODUCT",
+    "DB_2631075"."WSA994_CUSTOMER" "WSA994_CUSTOMER"
+where
+    "WSA994_FACTTABLE"."FT_PRODUCT_ID" = "WSA994_PRODUCT"."PRODUCT_ID"
+and
+    "WSA994_FACTTABLE"."FT_CUSTOMER_ID" = "WSA994_CUSTOMER"."CUSTOMER_ID"
+group by
+    extract (year from FT_TIME_ID),
+    "WSA994_PRODUCT"."DIVISION_ID",
+    "WSA994_PRODUCT"."DIVISION_DESC",
+    "WSA994_CUSTOMER"."COUNTRY_ID"
+order by
+    extract (year from FT_TIME_ID) ASC NULLS LAST,
+    "WSA994_PRODUCT"."DIVISION_ID" ASC NULLS LAST,
+    "WSA994_CUSTOMER"."COUNTRY_ID" ASC NULLS LAST]
+2023-05-26 10:59:44,663 DEBUG [mondrian.sql] 30: , exec 93 ms
+2023-05-26 10:59:44,813 DEBUG [mondrian.sql] 30: , exec+fetch 244 ms, 40 rows
+2023-05-26 11:00:13,960 DEBUG [mondrian.sql] 31: SqlTupleReader.readTuples [[Time.TimeHierarchy].[Year], [Product.ProductHierarchy].[Division], [Customer.CustomerHierarchy].[Country]]: executing sql [
+select
+    extract (year from FT_TIME_ID) as "c0",
+    "WSA994_PRODUCT"."DIVISION_ID" as "c1",
+    "WSA994_PRODUCT"."DIVISION_DESC" as "c2",
+    "WSA994_CUSTOMER"."COUNTRY_ID" as "c3"
+from
+    "DB_2631075"."WSA994_FACTTABLE" "WSA994_FACTTABLE",
+    "DB_2631075"."WSA994_PRODUCT" "WSA994_PRODUCT",
+    "DB_2631075"."WSA994_CUSTOMER" "WSA994_CUSTOMER"
+where
+    "WSA994_FACTTABLE"."FT_PRODUCT_ID" = "WSA994_PRODUCT"."PRODUCT_ID"
+and
+    "WSA994_FACTTABLE"."FT_CUSTOMER_ID" = "WSA994_CUSTOMER"."CUSTOMER_ID"
+group by
+    extract (year from FT_TIME_ID),
+    "WSA994_PRODUCT"."DIVISION_ID",
+    "WSA994_PRODUCT"."DIVISION_DESC",
+    "WSA994_CUSTOMER"."COUNTRY_ID"
+order by
+    extract (year from FT_TIME_ID) ASC NULLS LAST,
+    "WSA994_PRODUCT"."DIVISION_ID" ASC NULLS LAST,
+    "WSA994_CUSTOMER"."COUNTRY_ID" ASC NULLS LAST]
+2023-05-26 11:00:14,058 DEBUG [mondrian.sql] 31: , exec 96 ms
+2023-05-26 11:00:14,205 DEBUG [mondrian.sql] 31: , exec+fetch 244 ms, 40 rows
+2023-05-26 11:00:22,353 DEBUG [mondrian.sql] 32: SqlTupleReader.readTuples [[Time.TimeHierarchy].[Year], [Product.ProductHierarchy].[Division], [Customer.CustomerHierarchy].[Country]]: executing sql [
+select
+    extract (year from FT_TIME_ID) as "c0",
+    "WSA994_PRODUCT"."DIVISION_ID" as "c1",
+    "WSA994_PRODUCT"."DIVISION_DESC" as "c2",
+    "WSA994_CUSTOMER"."COUNTRY_ID" as "c3"
+from
+    "DB_2631075"."WSA994_FACTTABLE" "WSA994_FACTTABLE",
+    "DB_2631075"."WSA994_PRODUCT" "WSA994_PRODUCT",
+    "DB_2631075"."WSA994_CUSTOMER" "WSA994_CUSTOMER"
+where
+    "WSA994_FACTTABLE"."FT_PRODUCT_ID" = "WSA994_PRODUCT"."PRODUCT_ID"
+and
+    "WSA994_FACTTABLE"."FT_CUSTOMER_ID" = "WSA994_CUSTOMER"."CUSTOMER_ID"
+group by
+    extract (year from FT_TIME_ID),
+    "WSA994_PRODUCT"."DIVISION_ID",
+    "WSA994_PRODUCT"."DIVISION_DESC",
+    "WSA994_CUSTOMER"."COUNTRY_ID"
+order by
+    extract (year from FT_TIME_ID) ASC NULLS LAST,
+    "WSA994_PRODUCT"."DIVISION_ID" ASC NULLS LAST,
+    "WSA994_CUSTOMER"."COUNTRY_ID" ASC NULLS LAST]
+2023-05-26 11:00:22,446 DEBUG [mondrian.sql] 32: , exec 92 ms
+2023-05-26 11:00:22,595 DEBUG [mondrian.sql] 32: , exec+fetch 241 ms, 40 rows
+2023-05-26 11:00:32,208 DEBUG [mondrian.sql] 33: SqlTupleReader.readTuples [[Time.TimeHierarchy].[Year], [Product.ProductHierarchy].[Division], [Customer.CustomerHierarchy].[Country]]: executing sql [
+select
+    extract (year from FT_TIME_ID) as "c0",
+    "WSA994_PRODUCT"."DIVISION_ID" as "c1",
+    "WSA994_PRODUCT"."DIVISION_DESC" as "c2",
+    "WSA994_CUSTOMER"."COUNTRY_ID" as "c3"
+from
+    "DB_2631075"."WSA994_FACTTABLE" "WSA994_FACTTABLE",
+    "DB_2631075"."WSA994_PRODUCT" "WSA994_PRODUCT",
+    "DB_2631075"."WSA994_CUSTOMER" "WSA994_CUSTOMER"
+where
+    "WSA994_FACTTABLE"."FT_PRODUCT_ID" = "WSA994_PRODUCT"."PRODUCT_ID"
+and
+    "WSA994_FACTTABLE"."FT_CUSTOMER_ID" = "WSA994_CUSTOMER"."CUSTOMER_ID"
+group by
+    extract (year from FT_TIME_ID),
+    "WSA994_PRODUCT"."DIVISION_ID",
+    "WSA994_PRODUCT"."DIVISION_DESC",
+    "WSA994_CUSTOMER"."COUNTRY_ID"
+order by
+    extract (year from FT_TIME_ID) ASC NULLS LAST,
+    "WSA994_PRODUCT"."DIVISION_ID" ASC NULLS LAST,
+    "WSA994_CUSTOMER"."COUNTRY_ID" ASC NULLS LAST]
+2023-05-26 11:00:32,297 DEBUG [mondrian.sql] 33: , exec 88 ms
+2023-05-26 11:00:32,444 DEBUG [mondrian.sql] 33: , exec+fetch 235 ms, 40 rows
+2023-05-26 11:00:45,163 DEBUG [mondrian.sql] 34: SqlTupleReader.readTuples [[Time.TimeHierarchy].[Year], [Product.ProductHierarchy].[Division], [Customer.CustomerHierarchy].[Country]]: executing sql [
+select
+    extract (year from FT_TIME_ID) as "c0",
+    "WSA994_PRODUCT"."DIVISION_ID" as "c1",
+    "WSA994_PRODUCT"."DIVISION_DESC" as "c2",
+    "WSA994_CUSTOMER"."COUNTRY_ID" as "c3"
+from
+    "DB_2631075"."WSA994_FACTTABLE" "WSA994_FACTTABLE",
+    "DB_2631075"."WSA994_PRODUCT" "WSA994_PRODUCT",
+    "DB_2631075"."WSA994_CUSTOMER" "WSA994_CUSTOMER"
+where
+    "WSA994_FACTTABLE"."FT_PRODUCT_ID" = "WSA994_PRODUCT"."PRODUCT_ID"
+and
+    "WSA994_FACTTABLE"."FT_CUSTOMER_ID" = "WSA994_CUSTOMER"."CUSTOMER_ID"
+group by
+    extract (year from FT_TIME_ID),
+    "WSA994_PRODUCT"."DIVISION_ID",
+    "WSA994_PRODUCT"."DIVISION_DESC",
+    "WSA994_CUSTOMER"."COUNTRY_ID"
+order by
+    extract (year from FT_TIME_ID) ASC NULLS LAST,
+    "WSA994_PRODUCT"."DIVISION_ID" ASC NULLS LAST,
+    "WSA994_CUSTOMER"."COUNTRY_ID" ASC NULLS LAST]
+2023-05-26 11:00:45,241 DEBUG [mondrian.sql] 34: , exec 79 ms
+2023-05-26 11:00:45,395 DEBUG [mondrian.sql] 34: , exec+fetch 232 ms, 40 rows
+2023-05-26 11:01:04,192 DEBUG [mondrian.sql] 35: SqlTupleReader.readTuples [[Time.TimeHierarchy].[Year], [Product.ProductHierarchy].[Division], [Customer.CustomerHierarchy].[Country]]: executing sql [
+select
+    extract (year from FT_TIME_ID) as "c0",
+    "WSA994_PRODUCT"."DIVISION_ID" as "c1",
+    "WSA994_PRODUCT"."DIVISION_DESC" as "c2",
+    "WSA994_CUSTOMER"."COUNTRY_ID" as "c3"
+from
+    "DB_2631075"."WSA994_FACTTABLE" "WSA994_FACTTABLE",
+    "DB_2631075"."WSA994_PRODUCT" "WSA994_PRODUCT",
+    "DB_2631075"."WSA994_CUSTOMER" "WSA994_CUSTOMER"
+where
+    "WSA994_FACTTABLE"."FT_PRODUCT_ID" = "WSA994_PRODUCT"."PRODUCT_ID"
+and
+    "WSA994_FACTTABLE"."FT_CUSTOMER_ID" = "WSA994_CUSTOMER"."CUSTOMER_ID"
+group by
+    extract (year from FT_TIME_ID),
+    "WSA994_PRODUCT"."DIVISION_ID",
+    "WSA994_PRODUCT"."DIVISION_DESC",
+    "WSA994_CUSTOMER"."COUNTRY_ID"
+order by
+    extract (year from FT_TIME_ID) ASC NULLS LAST,
+    "WSA994_PRODUCT"."DIVISION_ID" ASC NULLS LAST,
+    "WSA994_CUSTOMER"."COUNTRY_ID" ASC NULLS LAST]
+2023-05-26 11:01:04,280 DEBUG [mondrian.sql] 35: , exec 87 ms
+2023-05-26 11:01:04,431 DEBUG [mondrian.sql] 35: , exec+fetch 239 ms, 40 rows
+2023-05-26 11:05:40,200 DEBUG [mondrian.sql] 36: SqlTupleReader.readTuples [[Time.TimeHierarchy].[Year], [Product.ProductHierarchy].[Division]]: executing sql [
+select
+    extract (year from FT_TIME_ID) as "c0",
+    "WSA994_PRODUCT"."DIVISION_ID" as "c1",
+    "WSA994_PRODUCT"."DIVISION_DESC" as "c2"
+from
+    "DB_2631075"."WSA994_FACTTABLE" "WSA994_FACTTABLE",
+    "DB_2631075"."WSA994_PRODUCT" "WSA994_PRODUCT"
+where
+    "WSA994_FACTTABLE"."FT_PRODUCT_ID" = "WSA994_PRODUCT"."PRODUCT_ID"
+group by
+    extract (year from FT_TIME_ID),
+    "WSA994_PRODUCT"."DIVISION_ID",
+    "WSA994_PRODUCT"."DIVISION_DESC"
+order by
+    extract (year from FT_TIME_ID) ASC NULLS LAST,
+    "WSA994_PRODUCT"."DIVISION_ID" ASC NULLS LAST]
+2023-05-26 11:05:40,292 DEBUG [mondrian.sql] 36: , exec 91 ms
+2023-05-26 11:05:40,365 DEBUG [mondrian.sql] 36: , exec+fetch 164 ms, 20 rows
+2023-05-26 11:05:44,318 DEBUG [mondrian.sql] 37: SqlTupleReader.readTuples [[Time.TimeHierarchy].[Year], [Product.ProductHierarchy].[Division], [Customer.CustomerHierarchy].[Country]]: executing sql [
+select
+    extract (year from FT_TIME_ID) as "c0",
+    "WSA994_PRODUCT"."DIVISION_ID" as "c1",
+    "WSA994_PRODUCT"."DIVISION_DESC" as "c2",
+    "WSA994_CUSTOMER"."COUNTRY_ID" as "c3"
+from
+    "DB_2631075"."WSA994_FACTTABLE" "WSA994_FACTTABLE",
+    "DB_2631075"."WSA994_PRODUCT" "WSA994_PRODUCT",
+    "DB_2631075"."WSA994_CUSTOMER" "WSA994_CUSTOMER"
+where
+    "WSA994_FACTTABLE"."FT_PRODUCT_ID" = "WSA994_PRODUCT"."PRODUCT_ID"
+and
+    "WSA994_FACTTABLE"."FT_CUSTOMER_ID" = "WSA994_CUSTOMER"."CUSTOMER_ID"
+group by
+    extract (year from FT_TIME_ID),
+    "WSA994_PRODUCT"."DIVISION_ID",
+    "WSA994_PRODUCT"."DIVISION_DESC",
+    "WSA994_CUSTOMER"."COUNTRY_ID"
+order by
+    extract (year from FT_TIME_ID) ASC NULLS LAST,
+    "WSA994_PRODUCT"."DIVISION_ID" ASC NULLS LAST,
+    "WSA994_CUSTOMER"."COUNTRY_ID" ASC NULLS LAST]
+2023-05-26 11:05:44,409 DEBUG [mondrian.sql] 37: , exec 90 ms
+2023-05-26 11:05:44,556 DEBUG [mondrian.sql] 37: , exec+fetch 238 ms, 40 rows
+2023-05-26 11:05:58,504 DEBUG [mondrian.sql] 38: SqlTupleReader.readTuples [[Time.TimeHierarchy].[Year], [Product.ProductHierarchy].[Division], [Customer.CustomerHierarchy].[Country]]: executing sql [
+select
+    extract (year from FT_TIME_ID) as "c0",
+    "WSA994_PRODUCT"."DIVISION_ID" as "c1",
+    "WSA994_PRODUCT"."DIVISION_DESC" as "c2",
+    "WSA994_CUSTOMER"."COUNTRY_ID" as "c3"
+from
+    "DB_2631075"."WSA994_FACTTABLE" "WSA994_FACTTABLE",
+    "DB_2631075"."WSA994_PRODUCT" "WSA994_PRODUCT",
+    "DB_2631075"."WSA994_CUSTOMER" "WSA994_CUSTOMER"
+where
+    "WSA994_FACTTABLE"."FT_PRODUCT_ID" = "WSA994_PRODUCT"."PRODUCT_ID"
+and
+    "WSA994_FACTTABLE"."FT_CUSTOMER_ID" = "WSA994_CUSTOMER"."CUSTOMER_ID"
+group by
+    extract (year from FT_TIME_ID),
+    "WSA994_PRODUCT"."DIVISION_ID",
+    "WSA994_PRODUCT"."DIVISION_DESC",
+    "WSA994_CUSTOMER"."COUNTRY_ID"
+order by
+    extract (year from FT_TIME_ID) ASC NULLS LAST,
+    "WSA994_PRODUCT"."DIVISION_ID" ASC NULLS LAST,
+    "WSA994_CUSTOMER"."COUNTRY_ID" ASC NULLS LAST]
+2023-05-26 11:05:58,598 DEBUG [mondrian.sql] 38: , exec 94 ms
+2023-05-26 11:05:58,743 DEBUG [mondrian.sql] 38: , exec+fetch 239 ms, 40 rows
+2023-05-26 11:12:06,747 DEBUG [mondrian.sql] 39: SqlMemberSource.getMemberChildren: executing sql [
+select
+    extract (year from FT_TIME_ID) as "c0"
+from
+    "DB_2631075"."WSA994_FACTTABLE" "WSA994_FACTTABLE"
+group by
+    extract (year from FT_TIME_ID)
+order by
+    extract (year from FT_TIME_ID) ASC NULLS LAST]
+2023-05-26 11:12:06,827 DEBUG [mondrian.sql] 39: , exec 79 ms
+2023-05-26 11:12:06,865 DEBUG [mondrian.sql] 39: , exec+fetch 118 ms, 10 rows
+2023-05-26 11:12:06,873 DEBUG [mondrian.sql] 40: SqlTupleReader.readTuples [[Product.ProductHierarchy].[Division], [Customer.CustomerHierarchy].[Country]]: executing sql [
+select
+    "WSA994_PRODUCT"."DIVISION_ID" as "c0",
+    "WSA994_PRODUCT"."DIVISION_DESC" as "c1",
+    "WSA994_CUSTOMER"."COUNTRY_ID" as "c2"
+from
+    "DB_2631075"."WSA994_PRODUCT" "WSA994_PRODUCT",
+    "DB_2631075"."WSA994_FACTTABLE" "WSA994_FACTTABLE",
+    "DB_2631075"."WSA994_CUSTOMER" "WSA994_CUSTOMER"
+where
+    "WSA994_FACTTABLE"."FT_PRODUCT_ID" = "WSA994_PRODUCT"."PRODUCT_ID"
+and
+    "WSA994_FACTTABLE"."FT_CUSTOMER_ID" = "WSA994_CUSTOMER"."CUSTOMER_ID"
+and
+    extract (year from FT_TIME_ID) in ('2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022')
+group by
+    "WSA994_PRODUCT"."DIVISION_ID",
+    "WSA994_PRODUCT"."DIVISION_DESC",
+    "WSA994_CUSTOMER"."COUNTRY_ID"
+order by
+    "WSA994_PRODUCT"."DIVISION_ID" ASC NULLS LAST,
+    "WSA994_CUSTOMER"."COUNTRY_ID" ASC NULLS LAST]
+2023-05-26 11:12:06,989 DEBUG [mondrian.sql] 40: , exec 115 ms
+2023-05-26 11:12:06,989 DEBUG [mondrian.sql] 40: , exec+fetch 115 ms, 4 rows
+2023-05-26 11:12:11,213 DEBUG [mondrian.sql] 41: SqlTupleReader.readTuples [[Product.ProductHierarchy].[Division], [Customer.CustomerHierarchy].[Country], [Time.TimeHierarchy].[Year]]: executing sql [
+select
+    "WSA994_PRODUCT"."DIVISION_ID" as "c0",
+    "WSA994_PRODUCT"."DIVISION_DESC" as "c1",
+    "WSA994_CUSTOMER"."COUNTRY_ID" as "c2",
+    extract (year from FT_TIME_ID) as "c3"
+from
+    "DB_2631075"."WSA994_PRODUCT" "WSA994_PRODUCT",
+    "DB_2631075"."WSA994_FACTTABLE" "WSA994_FACTTABLE",
+    "DB_2631075"."WSA994_CUSTOMER" "WSA994_CUSTOMER"
+where
+    "WSA994_FACTTABLE"."FT_PRODUCT_ID" = "WSA994_PRODUCT"."PRODUCT_ID"
+and
+    "WSA994_FACTTABLE"."FT_CUSTOMER_ID" = "WSA994_CUSTOMER"."CUSTOMER_ID"
+group by
+    "WSA994_PRODUCT"."DIVISION_ID",
+    "WSA994_PRODUCT"."DIVISION_DESC",
+    "WSA994_CUSTOMER"."COUNTRY_ID",
+    extract (year from FT_TIME_ID)
+order by
+    "WSA994_PRODUCT"."DIVISION_ID" ASC NULLS LAST,
+    "WSA994_CUSTOMER"."COUNTRY_ID" ASC NULLS LAST,
+    extract (year from FT_TIME_ID) ASC NULLS LAST]
+2023-05-26 11:12:11,311 DEBUG [mondrian.sql] 41: , exec 98 ms
+2023-05-26 11:12:11,459 DEBUG [mondrian.sql] 41: , exec+fetch 246 ms, 40 rows
+2023-05-26 11:12:19,240 DEBUG [mondrian.sql] 42: SqlTupleReader.readTuples [[Time.TimeHierarchy].[Year], [Product.ProductHierarchy].[Division], [Customer.CustomerHierarchy].[Country]]: executing sql [
+select
+    extract (year from FT_TIME_ID) as "c0",
+    "WSA994_PRODUCT"."DIVISION_ID" as "c1",
+    "WSA994_PRODUCT"."DIVISION_DESC" as "c2",
+    "WSA994_CUSTOMER"."COUNTRY_ID" as "c3"
+from
+    "DB_2631075"."WSA994_FACTTABLE" "WSA994_FACTTABLE",
+    "DB_2631075"."WSA994_PRODUCT" "WSA994_PRODUCT",
+    "DB_2631075"."WSA994_CUSTOMER" "WSA994_CUSTOMER"
+where
+    "WSA994_FACTTABLE"."FT_PRODUCT_ID" = "WSA994_PRODUCT"."PRODUCT_ID"
+and
+    "WSA994_FACTTABLE"."FT_CUSTOMER_ID" = "WSA994_CUSTOMER"."CUSTOMER_ID"
+group by
+    extract (year from FT_TIME_ID),
+    "WSA994_PRODUCT"."DIVISION_ID",
+    "WSA994_PRODUCT"."DIVISION_DESC",
+    "WSA994_CUSTOMER"."COUNTRY_ID"
+order by
+    extract (year from FT_TIME_ID) ASC NULLS LAST,
+    "WSA994_PRODUCT"."DIVISION_ID" ASC NULLS LAST,
+    "WSA994_CUSTOMER"."COUNTRY_ID" ASC NULLS LAST]
+2023-05-26 11:12:19,314 DEBUG [mondrian.sql] 42: , exec 73 ms
+2023-05-26 11:12:19,461 DEBUG [mondrian.sql] 42: , exec+fetch 221 ms, 40 rows

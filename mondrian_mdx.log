@@ -1,0 +1,192 @@
+2023-05-26 10:46:42,133 DEBUG [mondrian.mdx] 64: with set [~ROWS] as '{[Product.ProductHierarchy].[Product].Members}'
+select NON EMPTY {[Measures].[RevenueEUR]} ON COLUMNS,
+  NON EMPTY [~ROWS] ON ROWS
+from [HypercubeDirtBikes]
+
+2023-05-26 10:46:42,786 DEBUG [mondrian.mdx] 64: exec: 652 ms
+2023-05-26 10:47:41,658 DEBUG [mondrian.mdx] 165: with set [~ROWS] as '{[Product.ProductHierarchy].[ProductCategory].Members}'
+select NON EMPTY {[Measures].[RevenueEUR]} ON COLUMNS,
+  NON EMPTY [~ROWS] ON ROWS
+from [HypercubeDirtBikes]
+
+2023-05-26 10:47:41,719 DEBUG [mondrian.mdx] 165: exec: 60 ms
+2023-05-26 10:47:44,449 DEBUG [mondrian.mdx] 221: with set [~ROWS] as 'Hierarchize({{[Product.ProductHierarchy].[ProductCategory].Members}, {[Product.ProductHierarchy].[Product].Members}})'
+select NON EMPTY {[Measures].[RevenueEUR]} ON COLUMNS,
+  NON EMPTY [~ROWS] ON ROWS
+from [HypercubeDirtBikes]
+
+2023-05-26 10:47:44,459 DEBUG [mondrian.mdx] 221: exec: 10 ms
+2023-05-26 10:48:05,903 DEBUG [mondrian.mdx] 359: with set [~ROWS] as '{[Product.ProductHierarchy].[Product].Members}'
+select NON EMPTY {[Measures].[RevenueEUR]} ON COLUMNS,
+  NON EMPTY [~ROWS] ON ROWS
+from [HypercubeDirtBikes]
+
+2023-05-26 10:48:05,909 DEBUG [mondrian.mdx] 359: exec: 6 ms
+2023-05-26 10:48:12,053 DEBUG [mondrian.mdx] 470: with member [Measures].[Zero] as '0'
+select AddCalculatedMembers([Product.ProductHierarchy].[Product].Members) ON COLUMNS
+from [HypercubeDirtBikes]
+where [Measures].[Zero]
+
+2023-05-26 10:48:12,056 DEBUG [mondrian.mdx] 470: exec: 3 ms
+2023-05-26 10:48:42,343 DEBUG [mondrian.mdx] 535: with set [~COLUMNS] as '{[Customer.CustomerHierarchy].[Customer].Members}'
+  set [~ROWS] as '{[Product.ProductHierarchy].[Product].Members}'
+select NON EMPTY Crossjoin([~COLUMNS], {[Measures].[RevenueEUR]}) ON COLUMNS,
+  NON EMPTY [~ROWS] ON ROWS
+from [HypercubeDirtBikes]
+
+2023-05-26 10:48:45,826 DEBUG [mondrian.mdx] 535: exec: 3483 ms
+2023-05-26 10:48:49,808 DEBUG [mondrian.mdx] 690: with set [~COLUMNS_Customer_Customer.CustomerHierarchy] as '{[Customer.CustomerHierarchy].[Customer].Members}'
+  set [~COLUMNS_Time_Time.TimeHierarchy] as '{[Time.TimeHierarchy].[Day].Members}'
+  set [~ROWS] as '{[Product.ProductHierarchy].[Product].Members}'
+select NON EMPTY Crossjoin(NonEmptyCrossJoin([~COLUMNS_Customer_Customer.CustomerHierarchy], [~COLUMNS_Time_Time.TimeHierarchy]), {[Measures].[RevenueEUR]}) ON COLUMNS,
+  NON EMPTY [~ROWS] ON ROWS
+from [HypercubeDirtBikes]
+
+2023-05-26 10:51:40,501 DEBUG [mondrian.mdx] 690: exec: 170693 ms
+2023-05-26 10:59:31,683 DEBUG [mondrian.mdx] 818: with set [~ROWS] as '{[Time.TimeHierarchy].[Year].Members}'
+select NON EMPTY {[Measures].[RevenueUSD], [Measures].[DiscountUSD], [Measures].[CostOfGoodsSoldUSD], [Measures].[SalesQuantity], [Measures].[NoOfSalesOrders], [Measures].[NetSales], [Measures].[RevenueEUR]} ON COLUMNS,
+  NON EMPTY [~ROWS] ON ROWS
+from [HypercubeDirtBikes]
+
+2023-05-26 10:59:32,398 DEBUG [mondrian.mdx] 818: exec: 715 ms
+2023-05-26 10:59:34,362 DEBUG [mondrian.mdx] 933: with set [~COLUMNS] as '{[Product.ProductHierarchy].[Division].Members}'
+  set [~ROWS] as '{[Time.TimeHierarchy].[Year].Members}'
+select NON EMPTY Crossjoin([~COLUMNS], {[Measures].[RevenueUSD], [Measures].[DiscountUSD], [Measures].[CostOfGoodsSoldUSD], [Measures].[SalesQuantity], [Measures].[NoOfSalesOrders], [Measures].[NetSales], [Measures].[RevenueEUR]}) ON COLUMNS,
+  NON EMPTY [~ROWS] ON ROWS
+from [HypercubeDirtBikes]
+
+2023-05-26 10:59:34,665 DEBUG [mondrian.mdx] 933: exec: 303 ms
+2023-05-26 10:59:35,450 DEBUG [mondrian.mdx] 1067: with set [~COLUMNS_Product_Product.ProductHierarchy] as '{[Product.ProductHierarchy].[Division].Members}'
+  set [~COLUMNS_Customer_Customer.CustomerHierarchy] as '{[Customer.CustomerHierarchy].[Country].Members}'
+  set [~ROWS] as '{[Time.TimeHierarchy].[Year].Members}'
+select NON EMPTY Crossjoin(NonEmptyCrossJoin([~COLUMNS_Product_Product.ProductHierarchy], [~COLUMNS_Customer_Customer.CustomerHierarchy]), {[Measures].[RevenueUSD], [Measures].[DiscountUSD], [Measures].[CostOfGoodsSoldUSD], [Measures].[SalesQuantity], [Measures].[NoOfSalesOrders], [Measures].[NetSales], [Measures].[RevenueEUR]}) ON COLUMNS,
+  NON EMPTY [~ROWS] ON ROWS
+from [HypercubeDirtBikes]
+
+2023-05-26 10:59:35,941 DEBUG [mondrian.mdx] 1067: exec: 490 ms
+2023-05-26 10:59:37,858 DEBUG [mondrian.mdx] 1230: with set [~COLUMNS] as '{[Customer.CustomerHierarchy].[Country].Members}'
+  set [~ROWS_Product_Product.ProductHierarchy] as '{[Product.ProductHierarchy].[Division].Members}'
+  set [~ROWS_Time_Time.TimeHierarchy] as '{[Time.TimeHierarchy].[Year].Members}'
+select NON EMPTY Crossjoin([~COLUMNS], {[Measures].[RevenueUSD], [Measures].[DiscountUSD], [Measures].[CostOfGoodsSoldUSD], [Measures].[SalesQuantity], [Measures].[NoOfSalesOrders], [Measures].[NetSales], [Measures].[RevenueEUR]}) ON COLUMNS,
+  NON EMPTY NonEmptyCrossJoin([~ROWS_Product_Product.ProductHierarchy], [~ROWS_Time_Time.TimeHierarchy]) ON ROWS
+from [HypercubeDirtBikes]
+
+2023-05-26 10:59:38,069 DEBUG [mondrian.mdx] 1230: exec: 211 ms
+2023-05-26 10:59:39,687 DEBUG [mondrian.mdx] 1384: with set [~COLUMNS] as '{[Customer.CustomerHierarchy].[Country].Members}'
+  set [~ROWS_Product_Product.ProductHierarchy] as '{[Product.ProductHierarchy].[Division].Members}'
+  set [~ROWS_Time_Time.TimeHierarchy] as '{[Time.TimeHierarchy].[Year].Members}'
+select NON EMPTY Crossjoin([~COLUMNS], {[Measures].[RevenueUSD], [Measures].[DiscountUSD], [Measures].[CostOfGoodsSoldUSD], [Measures].[SalesQuantity], [Measures].[NoOfSalesOrders], [Measures].[NetSales], [Measures].[RevenueEUR]}) ON COLUMNS,
+  NON EMPTY NonEmptyCrossJoin([~ROWS_Product_Product.ProductHierarchy], [~ROWS_Time_Time.TimeHierarchy]) ON ROWS
+from [HypercubeDirtBikes]
+
+2023-05-26 10:59:39,835 DEBUG [mondrian.mdx] 1384: exec: 148 ms
+2023-05-26 10:59:42,052 DEBUG [mondrian.mdx] 1538: with set [~COLUMNS] as '{[Customer.CustomerHierarchy].[Country].Members}'
+  set [~ROWS_Time_Time.TimeHierarchy] as '{[Time.TimeHierarchy].[Year].Members}'
+  set [~ROWS_Product_Product.ProductHierarchy] as '{[Product.ProductHierarchy].[Division].Members}'
+select NON EMPTY Crossjoin([~COLUMNS], {[Measures].[RevenueUSD], [Measures].[DiscountUSD], [Measures].[CostOfGoodsSoldUSD], [Measures].[SalesQuantity], [Measures].[NoOfSalesOrders], [Measures].[NetSales], [Measures].[RevenueEUR]}) ON COLUMNS,
+  NON EMPTY NonEmptyCrossJoin([~ROWS_Time_Time.TimeHierarchy], [~ROWS_Product_Product.ProductHierarchy]) ON ROWS
+from [HypercubeDirtBikes]
+
+2023-05-26 10:59:42,209 DEBUG [mondrian.mdx] 1538: exec: 157 ms
+2023-05-26 10:59:44,568 DEBUG [mondrian.mdx] 1692: with set [~ROWS_Time_Time.TimeHierarchy] as '{[Time.TimeHierarchy].[Year].Members}'
+  set [~ROWS_Product_Product.ProductHierarchy] as '{[Product.ProductHierarchy].[Division].Members}'
+  set [~ROWS_Customer_Customer.CustomerHierarchy] as '{[Customer.CustomerHierarchy].[Country].Members}'
+select NON EMPTY {[Measures].[RevenueUSD], [Measures].[DiscountUSD], [Measures].[CostOfGoodsSoldUSD], [Measures].[SalesQuantity], [Measures].[NoOfSalesOrders], [Measures].[NetSales], [Measures].[RevenueEUR]} ON COLUMNS,
+  NON EMPTY NonEmptyCrossJoin([~ROWS_Time_Time.TimeHierarchy], NonEmptyCrossJoin([~ROWS_Product_Product.ProductHierarchy], [~ROWS_Customer_Customer.CustomerHierarchy])) ON ROWS
+from [HypercubeDirtBikes]
+
+2023-05-26 10:59:44,817 DEBUG [mondrian.mdx] 1692: exec: 249 ms
+2023-05-26 11:00:13,960 DEBUG [mondrian.mdx] 1872: with set [~ROWS_Time_Time.TimeHierarchy] as '{[Time.TimeHierarchy].[Year].Members}'
+  set [~ROWS_Product_Product.ProductHierarchy] as '{[Product.ProductHierarchy].[Division].Members}'
+  set [~ROWS_Customer_Customer.CustomerHierarchy] as '{[Customer.CustomerHierarchy].[Country].Members}'
+select NON EMPTY {[Measures].[RevenueUSD], [Measures].[DiscountUSD], [Measures].[CostOfGoodsSoldUSD], [Measures].[SalesQuantity], [Measures].[NoOfSalesOrders], [Measures].[NetSales], [Measures].[RevenueEUR]} ON COLUMNS,
+  NON EMPTY NonEmptyCrossJoin([~ROWS_Time_Time.TimeHierarchy], NonEmptyCrossJoin([~ROWS_Product_Product.ProductHierarchy], [~ROWS_Customer_Customer.CustomerHierarchy])) ON ROWS
+from [HypercubeDirtBikes]
+
+2023-05-26 11:00:14,208 DEBUG [mondrian.mdx] 1872: exec: 248 ms
+2023-05-26 11:00:22,353 DEBUG [mondrian.mdx] 2370: with set [~ROWS_Time_Time.TimeHierarchy] as '{[Time.TimeHierarchy].[Year].Members}'
+  set [~ROWS_Product_Product.ProductHierarchy] as '{[Product.ProductHierarchy].[Division].Members}'
+  set [~ROWS_Customer_Customer.CustomerHierarchy] as '{[Customer.CustomerHierarchy].[Country].Members}'
+select NON EMPTY {[Measures].[RevenueUSD], [Measures].[DiscountUSD], [Measures].[CostOfGoodsSoldUSD], [Measures].[SalesQuantity], [Measures].[NoOfSalesOrders], [Measures].[NetSales], [Measures].[RevenueEUR]} ON COLUMNS,
+  NON EMPTY NonEmptyCrossJoin([~ROWS_Time_Time.TimeHierarchy], NonEmptyCrossJoin([~ROWS_Product_Product.ProductHierarchy], [~ROWS_Customer_Customer.CustomerHierarchy])) ON ROWS
+from [HypercubeDirtBikes]
+
+2023-05-26 11:00:22,597 DEBUG [mondrian.mdx] 2370: exec: 244 ms
+2023-05-26 11:00:32,207 DEBUG [mondrian.mdx] 2868: with set [~ROWS_Time_Time.TimeHierarchy] as '{[Time.TimeHierarchy].[Year].Members}'
+  set [~ROWS_Product_Product.ProductHierarchy] as '{[Product.ProductHierarchy].[Division].Members}'
+  set [~ROWS_Customer_Customer.CustomerHierarchy] as '{[Customer.CustomerHierarchy].[Country].Members}'
+select NON EMPTY {[Measures].[RevenueUSD], [Measures].[DiscountUSD], [Measures].[CostOfGoodsSoldUSD], [Measures].[SalesQuantity], [Measures].[NoOfSalesOrders], [Measures].[NetSales], [Measures].[RevenueEUR]} ON COLUMNS,
+  NON EMPTY NonEmptyCrossJoin([~ROWS_Time_Time.TimeHierarchy], NonEmptyCrossJoin([~ROWS_Product_Product.ProductHierarchy], [~ROWS_Customer_Customer.CustomerHierarchy])) ON ROWS
+from [HypercubeDirtBikes]
+
+2023-05-26 11:00:32,446 DEBUG [mondrian.mdx] 2868: exec: 239 ms
+2023-05-26 11:00:45,162 DEBUG [mondrian.mdx] 3366: with set [~ROWS_Time_Time.TimeHierarchy] as '{[Time.TimeHierarchy].[Year].Members}'
+  set [~ROWS_Product_Product.ProductHierarchy] as '{[Product.ProductHierarchy].[Division].Members}'
+  set [~ROWS_Customer_Customer.CustomerHierarchy] as '{[Customer.CustomerHierarchy].[Country].Members}'
+select NON EMPTY {[Measures].[RevenueUSD], [Measures].[DiscountUSD], [Measures].[CostOfGoodsSoldUSD], [Measures].[SalesQuantity], [Measures].[NoOfSalesOrders], [Measures].[NetSales], [Measures].[RevenueEUR]} ON COLUMNS,
+  NON EMPTY NonEmptyCrossJoin([~ROWS_Time_Time.TimeHierarchy], NonEmptyCrossJoin([~ROWS_Product_Product.ProductHierarchy], [~ROWS_Customer_Customer.CustomerHierarchy])) ON ROWS
+from [HypercubeDirtBikes]
+
+2023-05-26 11:00:45,399 DEBUG [mondrian.mdx] 3366: exec: 237 ms
+2023-05-26 11:01:04,191 DEBUG [mondrian.mdx] 3864: with set [~ROWS_Time_Time.TimeHierarchy] as '{[Time.TimeHierarchy].[Year].Members}'
+  set [~ROWS_Product_Product.ProductHierarchy] as '{[Product.ProductHierarchy].[Division].Members}'
+  set [~ROWS_Customer_Customer.CustomerHierarchy] as '{[Customer.CustomerHierarchy].[Country].Members}'
+select NON EMPTY {[Measures].[RevenueUSD], [Measures].[DiscountUSD], [Measures].[CostOfGoodsSoldUSD], [Measures].[SalesQuantity], [Measures].[NoOfSalesOrders], [Measures].[NetSales], [Measures].[RevenueEUR]} ON COLUMNS,
+  NON EMPTY NonEmptyCrossJoin([~ROWS_Time_Time.TimeHierarchy], NonEmptyCrossJoin([~ROWS_Product_Product.ProductHierarchy], [~ROWS_Customer_Customer.CustomerHierarchy])) ON ROWS
+from [HypercubeDirtBikes]
+
+2023-05-26 11:01:04,434 DEBUG [mondrian.mdx] 3864: exec: 243 ms
+2023-05-26 11:05:33,578 DEBUG [mondrian.mdx] 4357: with set [~ROWS] as '{[Time.TimeHierarchy].[Year].Members}'
+select NON EMPTY {[Measures].[RevenueUSD], [Measures].[DiscountUSD], [Measures].[CostOfGoodsSoldUSD], [Measures].[SalesQuantity], [Measures].[NoOfSalesOrders], [Measures].[NetSales], [Measures].[RevenueEUR]} ON COLUMNS,
+  NON EMPTY [~ROWS] ON ROWS
+from [HypercubeDirtBikes]
+
+2023-05-26 11:05:33,582 DEBUG [mondrian.mdx] 4357: exec: 4 ms
+2023-05-26 11:05:39,804 DEBUG [mondrian.mdx] 4472: with set [~ROWS_Time_Time.TimeHierarchy] as '{[Time.TimeHierarchy].[Year].Members}'
+  set [~ROWS_Product_Product.ProductHierarchy] as '{[Product.ProductHierarchy].[Division].Members}'
+select NON EMPTY {[Measures].[RevenueUSD], [Measures].[DiscountUSD], [Measures].[CostOfGoodsSoldUSD], [Measures].[SalesQuantity], [Measures].[NoOfSalesOrders], [Measures].[NetSales], [Measures].[RevenueEUR]} ON COLUMNS,
+  NON EMPTY NonEmptyCrossJoin([~ROWS_Time_Time.TimeHierarchy], [~ROWS_Product_Product.ProductHierarchy]) ON ROWS
+from [HypercubeDirtBikes]
+
+2023-05-26 11:05:40,367 DEBUG [mondrian.mdx] 4472: exec: 563 ms
+2023-05-26 11:05:44,317 DEBUG [mondrian.mdx] 4612: with set [~ROWS_Time_Time.TimeHierarchy] as '{[Time.TimeHierarchy].[Year].Members}'
+  set [~ROWS_Product_Product.ProductHierarchy] as '{[Product.ProductHierarchy].[Division].Members}'
+  set [~ROWS_Customer_Customer.CustomerHierarchy] as '{[Customer.CustomerHierarchy].[Country].Members}'
+select NON EMPTY {[Measures].[RevenueUSD], [Measures].[DiscountUSD], [Measures].[CostOfGoodsSoldUSD], [Measures].[SalesQuantity], [Measures].[NoOfSalesOrders], [Measures].[NetSales], [Measures].[RevenueEUR]} ON COLUMNS,
+  NON EMPTY NonEmptyCrossJoin([~ROWS_Time_Time.TimeHierarchy], NonEmptyCrossJoin([~ROWS_Product_Product.ProductHierarchy], [~ROWS_Customer_Customer.CustomerHierarchy])) ON ROWS
+from [HypercubeDirtBikes]
+
+2023-05-26 11:05:44,562 DEBUG [mondrian.mdx] 4612: exec: 245 ms
+2023-05-26 11:05:58,503 DEBUG [mondrian.mdx] 4792: with set [~ROWS_Time_Time.TimeHierarchy] as '{[Time.TimeHierarchy].[Year].Members}'
+  set [~ROWS_Product_Product.ProductHierarchy] as '{[Product.ProductHierarchy].[Division].Members}'
+  set [~ROWS_Customer_Customer.CustomerHierarchy] as '{[Customer.CustomerHierarchy].[Country].Members}'
+select NON EMPTY {[Measures].[RevenueUSD], [Measures].[DiscountUSD], [Measures].[CostOfGoodsSoldUSD], [Measures].[SalesQuantity], [Measures].[NoOfSalesOrders], [Measures].[NetSales], [Measures].[RevenueEUR]} ON COLUMNS,
+  NON EMPTY NonEmptyCrossJoin([~ROWS_Time_Time.TimeHierarchy], NonEmptyCrossJoin([~ROWS_Product_Product.ProductHierarchy], [~ROWS_Customer_Customer.CustomerHierarchy])) ON ROWS
+from [HypercubeDirtBikes]
+
+2023-05-26 11:05:58,746 DEBUG [mondrian.mdx] 4792: exec: 243 ms
+2023-05-26 11:12:06,359 DEBUG [mondrian.mdx] 5290: with set [~FILTER] as '{[Time.TimeHierarchy].[Year].Members}'
+  set [~ROWS_Product_Product.ProductHierarchy] as '{[Product.ProductHierarchy].[Division].Members}'
+  set [~ROWS_Customer_Customer.CustomerHierarchy] as '{[Customer.CustomerHierarchy].[Country].Members}'
+select NON EMPTY {[Measures].[RevenueUSD], [Measures].[DiscountUSD], [Measures].[CostOfGoodsSoldUSD], [Measures].[SalesQuantity], [Measures].[NoOfSalesOrders], [Measures].[NetSales], [Measures].[RevenueEUR]} ON COLUMNS,
+  NON EMPTY NonEmptyCrossJoin([~ROWS_Product_Product.ProductHierarchy], [~ROWS_Customer_Customer.CustomerHierarchy]) ON ROWS
+from [HypercubeDirtBikes]
+where [~FILTER]
+
+2023-05-26 11:12:06,993 DEBUG [mondrian.mdx] 5290: exec: 634 ms
+2023-05-26 11:12:11,213 DEBUG [mondrian.mdx] 5494: with set [~ROWS_Product_Product.ProductHierarchy] as '{[Product.ProductHierarchy].[Division].Members}'
+  set [~ROWS_Customer_Customer.CustomerHierarchy] as '{[Customer.CustomerHierarchy].[Country].Members}'
+  set [~ROWS_Time_Time.TimeHierarchy] as '{[Time.TimeHierarchy].[Year].Members}'
+select NON EMPTY {[Measures].[RevenueUSD], [Measures].[DiscountUSD], [Measures].[CostOfGoodsSoldUSD], [Measures].[SalesQuantity], [Measures].[NoOfSalesOrders], [Measures].[NetSales], [Measures].[RevenueEUR]} ON COLUMNS,
+  NON EMPTY NonEmptyCrossJoin([~ROWS_Product_Product.ProductHierarchy], NonEmptyCrossJoin([~ROWS_Customer_Customer.CustomerHierarchy], [~ROWS_Time_Time.TimeHierarchy])) ON ROWS
+from [HypercubeDirtBikes]
+
+2023-05-26 11:12:11,469 DEBUG [mondrian.mdx] 5494: exec: 256 ms
+2023-05-26 11:12:19,239 DEBUG [mondrian.mdx] 5992: with set [~ROWS_Time_Time.TimeHierarchy] as '{[Time.TimeHierarchy].[Year].Members}'
+  set [~ROWS_Product_Product.ProductHierarchy] as '{[Product.ProductHierarchy].[Division].Members}'
+  set [~ROWS_Customer_Customer.CustomerHierarchy] as '{[Customer.CustomerHierarchy].[Country].Members}'
+select NON EMPTY {[Measures].[RevenueUSD], [Measures].[DiscountUSD], [Measures].[CostOfGoodsSoldUSD], [Measures].[SalesQuantity], [Measures].[NoOfSalesOrders], [Measures].[NetSales], [Measures].[RevenueEUR]} ON COLUMNS,
+  NON EMPTY NonEmptyCrossJoin([~ROWS_Time_Time.TimeHierarchy], NonEmptyCrossJoin([~ROWS_Product_Product.ProductHierarchy], [~ROWS_Customer_Customer.CustomerHierarchy])) ON ROWS
+from [HypercubeDirtBikes]
+
+2023-05-26 11:12:19,467 DEBUG [mondrian.mdx] 5992: exec: 228 ms
