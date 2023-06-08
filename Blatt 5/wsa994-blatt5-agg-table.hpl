@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pipeline>
+  <info>
+    <name>wsa994-blatt5-agg-table</name>
+    <name_sync_with_filename>Y</name_sync_with_filename>
+    <description/>
+    <extended_description/>
+    <pipeline_version/>
+    <pipeline_type>Normal</pipeline_type>
+    <parameters>
+    </parameters>
+    <capture_transform_performance>N</capture_transform_performance>
+    <transform_performance_capturing_delay>1000</transform_performance_capturing_delay>
+    <transform_performance_capturing_size_limit>100</transform_performance_capturing_size_limit>
+    <created_user>-</created_user>
+    <created_date>2023/06/04 16:10:47.702</created_date>
+    <modified_user>-</modified_user>
+    <modified_date>2023/06/04 16:10:47.702</modified_date>
+  </info>
+  <notepads>
+  </notepads>
+  <order>
+    <hop>
+      <from>select from facttable</from>
+      <to>Insert / update agg_table</to>
+      <enabled>Y</enabled>
+    </hop>
+  </order>
+  <transform>
+    <name>Insert / update agg_table</name>
+    <type>InsertUpdate</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <commit>5000</commit>
+    <connection>oracle-thuyanh</connection>
+    <lookup>
+      <key>
+        <condition>=</condition>
+        <field>AGG_MONTH</field>
+        <name>AGG_MONTH</name>
+        <name2/>
+      </key>
+      <key>
+        <condition>=</condition>
+        <field>AGG_YEAR</field>
+        <name>AGG_YEAR</name>
+        <name2/>
+      </key>
+      <key>
+        <condition>=</condition>
+        <field>AGG_CUSTOMER_ID</field>
+        <name>AGG_CUSTOMER_ID</name>
+        <name2/>
+      </key>
+      <key>
+        <condition>=</condition>
+        <field>AGG_DIVISION_ID</field>
+        <name>AGG_DIVISION_ID</name>
+        <name2/>
+      </key>
+      <key>
+        <condition>=</condition>
+        <field>AGG_CATEGORY_ID</field>
+        <name>AGG_CATEGORY_ID</name>
+        <name2/>
+      </key>
+      <schema>DB_2631075</schema>
+      <table>AGG_WSA994_FACTTABLE</table>
+      <value>
+        <name>AGG_MONTH</name>
+        <rename>AGG_MONTH</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>AGG_YEAR</name>
+        <rename>AGG_YEAR</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>AGG_CUSTOMER_ID</name>
+        <rename>AGG_CUSTOMER_ID</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>AGG_DIVISION_ID</name>
+        <rename>AGG_DIVISION_ID</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>AGG_CATEGORY_ID</name>
+        <rename>AGG_CATEGORY_ID</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>AGG_REVENUEUSD</name>
+        <rename>AGG_REVENUEUSD</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>AGG_REVENUEEUR</name>
+        <rename>AGG_MONTH</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>AGG_COGMUSD</name>
+        <rename>AGG_COGMUSD</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>AGG_SALESQUANTITY</name>
+        <rename>AGG_SALESQUANTITY</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>AGG_NOOFSALESORDERS</name>
+        <rename>AGG_NOOFSALESORDERS</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>AGG_NETSALESUSD</name>
+        <rename>AGG_NETSALESUSD</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>AGG_DISCOUNTUSD</name>
+        <rename>AGG_DISCOUNTUSD</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>AGG_FACT_COUNT</name>
+        <rename>AGG_FACT_COUNT</rename>
+        <update>Y</update>
+      </value>
+    </lookup>
+    <update_bypassed>N</update_bypassed>
+    <attributes/>
+    <GUI>
+      <xloc>592</xloc>
+      <yloc>144</yloc>
+    </GUI>
+  </transform>
+  <transform>
+    <name>select from facttable</name>
+    <type>TableInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>oracle-thuyanh</connection>
+    <execute_each_row>N</execute_each_row>
+    <limit>0</limit>
+    <sql>SELECT SUM(FT_REVENUEUSD) AS AGG_REVENUEUSD,
+       SUM(FT_REVENUEEUR) AS AGG_REVENUEEUR,
+       SUM(FT_COGMUSD) AS AGG_COGMUSD,
+       SUM(FT_SALESQUANTITY) AS AGG_SALESQUANTITY,
+       SUM(FT_NOOFSALESORDERS) AS AGG_NOOFSALESORDERS,
+       SUM(FT_NETSALESUSD) AS AGG_NETSALESUSD,
+       SUM(FT_DISCOUNTUSD) AS AGG_DISCOUNTUSD,
+       CATEGORY_ID AS AGG_CATEGORY_ID,
+       DIVISION_ID AS AGG_DIVISION_ID,
+       FT_CUSTOMER_ID AS AGG_CUSTOMER_ID,
+       EXTRACT(MONTH FROM FT_TIME_ID) AS AGG_MONTH,
+       EXTRACT(YEAR FROM FT_TIME_ID) AS AGG_YEAR,
+       COUNT(*) AS AGG_FACT_COUNT
+FROM WSA994_FACTTABLE JOIN WSA994_PRODUCT ON FT_PRODUCT_ID = WSA994_PRODUCT.PRODUCT_ID
+GROUP BY CATEGORY_ID, DIVISION_ID, FT_CUSTOMER_ID, EXTRACT(MONTH FROM FT_TIME_ID), EXTRACT(YEAR FROM FT_TIME_ID)</sql>
+    <variables_active>N</variables_active>
+    <attributes/>
+    <GUI>
+      <xloc>400</xloc>
+      <yloc>144</yloc>
+    </GUI>
+  </transform>
+  <transform_error_handling>
+  </transform_error_handling>
+  <attributes/>
+</pipeline>

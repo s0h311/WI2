@@ -2,31 +2,30 @@
   <Cube name="HypercubeDirtBikes" caption="Purchasing Data_Star" description="Cube" cache="true" enabled="true">
     <!--Definition FT-->
     <Table name="WSA994_FACTTABLE" schema="DB_2631075">
-      <AggExclude pattern=".*"/>
+      <!--<AggExclude pattern=".*"/> WHAT IS DIS?-->
       <!--Definition FCT -->
-      <!---<AggName name="AGG_WI2_WSA994_FACTCONSTELLATIONTABLE">
+      <AggName name="AGG_WSA994_FACTTABLE">
         <AggFactCount name="fact_count" column="AGG_FACT_COUNT" />
         <AggMeasure name="[Measures].[RevenueUSD]" column="AGG_REVENUEUSD" />
+        <AggMeasure name="[Measures].[RevenueEUR]" column="AGG_REVENUEEUR" />
         <AggMeasure name="[Measures].[DiscountUSD]" column="AGG_DISCOUNTUSD" />
         <AggMeasure name="[Measures].[CostOfGoodsSoldUSD]" column="AGG_COGMUSD" />
         <AggMeasure name="[Measures].[SalesQuantity]" column="AGG_SALESQUANTITY" />
         <AggMeasure name="[Measures].[NoOfSalesOrders]" column="AGG_NOOFSALESORDERS" />
         <AggMeasure name="[Measures].[NetSales]" column="AGG_NETSALESUSD" />
 
-        <AggLevel name="[Time.TimeHierarchy].[Year]" column="AGG_TIME_YEAR" collapsed="true" />
-        <AggLevel name="[Time.TimeHierarchy].[Month]" column="AGG_TIME_MONTH" collapsed="true" />
-        <AggLevel name="[Product.ProductHierarchy].[ProductCategory]" column="AGG_PRODUCTCATEGORY"
-          collapsed="true" />
-        <AggLevel name="[Product.ProductHierarchy].[Division]" column="AGG_DIVISION" collapsed="true" />
-        <AggLevel name="[Customer.CustomerHierarchy].[Customer]" column="AGG_CUSTOMER_ID" collapsed="false" />
-      </AggName>-->
+        <AggLevel name="[Time.TimeHierarchy].[Year]" column="AGG_YEAR" collapsed="true" />
+        <AggLevel name="[Time.TimeHierarchy].[Month]" column="AGG_MONTH" collapsed="true" />
+        <AggLevel name="[Product.ProductHierarchy].[ProductCategory]" column="AGG_CATEGORY_ID" collapsed="true" />
+        <AggLevel name="[Product.ProductHierarchy].[Division]" column="AGG_DIVISION_ID" collapsed="true" />
+        <AggLevel name="[Customer.CUSTOMER_AS_IS].[Customer_AS_IS]" column="AGG_CUSTOMER_ID" collapsed="false" />
+      </AggName>
     </Table>
 
     <!--Productdimension auf Grundlage des Star-Schemas-->
     <Dimension type="StandardDimension" foreignKey="FT_PRODUCT_ID" name="Product">
       <Hierarchy name="ProductHierarchy" primaryKey="PRODUCT_ID" hasAll="true">
         <Table name="WSA994_PRODUCT" schema="DB_2631075" />
-
         <!--L1-->
         <Level name="Division" column="DIVISION_ID" nameColumn="DIVISION_DESC" />
         <!--L1-->
@@ -38,17 +37,32 @@
 
     <!--Customerdimension auf Grundlage des Star-Schemas-->
     <Dimension type="StandardDimension" foreignKey="FT_CUSTOMER_ID" name="Customer">
-      <Hierarchy name="CustomerHierarchy" primaryKey="CUSTOMER_ID" hasAll="true">
-        <Table name="WSA994_CUSTOMER" schema="DB_2631075" />
-
+      <Hierarchy name ="CUSTOMER_AS_IS" primaryKey="CUSTOMER_ID" hasAll="true">
+        <View alias="CUSTOMER_AS_IS" schema="DB_2631075">
+          <SQL dialect="generic">select * from WSA994_CUSTOMER where CURRENT_DATE between VALID_FROM and VALID_TO</SQL>
+        </View>
         <!--L1-->
-        <Level name="Country" column="COUNTRY_ID" />
+        <Level name="Country_AS_IS" column="COUNTRY_ID" />
         <!--L2-->
-        <Level name="SalesOrg" column="SALESORG_ID" nameColumn="SALESORG_DESC" />
+        <Level name="SalesOrg_AS_IS" column="SALESORG_ID" nameColumn="SALESORG_DESC" />
         <!--L3-->
-        <Level name="City" column="CITY_DESC" />
+        <Level name="City_AS_IS" column="CITY_DESC" />
         <!--L4-->
-        <Level name="Customer" column="CUSTOMER_ID" nameColumn="CUSTOMER_DESC" uniqueMembers="true" />
+        <Level name="Customer_AS_IS" column="CUSTOMER_ID" nameColumn="CUSTOMER_DESC" uniqueMembers="true" />
+      </Hierarchy>
+
+      <Hierarchy name ="CUSTOMER_AS_OF" primaryKey="CUSTOMER_ID" hasAll="true">
+        <View alias="CUSTOMER_AS_OF" schema="DB_2631075">
+          <SQL dialect="generic">select * from WSA994_CUSTOMER where to_date('2015-05-28','yyyy-MM-dd') between VALID_FROM and VALID_TO</SQL>
+        </View>
+        <!--L1-->
+        <Level name="Country_AS_OF" column="COUNTRY_ID" />
+        <!--L2-->
+        <Level name="SalesOrg_AS_OF" column="SALESORG_ID" nameColumn="SALESORG_DESC" />
+        <!--L3-->
+        <Level name="City_AS_OF" column="CITY_DESC" />
+        <!--L4-->
+        <Level name="Customer_AS_OF" column="CUSTOMER_ID" nameColumn="CUSTOMER_DESC" uniqueMembers="true" />
       </Hierarchy>
     </Dimension>
 
@@ -59,25 +73,23 @@
         <Level name="Year" levelType="TimeYears">
           <KeyExpression>
             <SQL dialect="generic">
-              extract (year from FT_TIME_ID)
+              extract(year from FT_TIME_ID)
             </SQL>
           </KeyExpression>
         </Level>
         <!--L2-->
         <Level name="Month" levelType="TimeMonths">
-
           <KeyExpression>
             <SQL dialect="generic">
-              extract (month from FT_TIME_ID)
+              extract(month from FT_TIME_ID)
             </SQL>
           </KeyExpression>
         </Level>
         <!--L3-->
         <Level name="Day" column="Day" levelType="TimeDays">
-
           <KeyExpression>
             <SQL dialect="generic">
-              EXTRACT(day FROM FT_TIME_ID)
+              extract(day FROM FT_TIME_ID)
             </SQL>
           </KeyExpression>
         </Level>
